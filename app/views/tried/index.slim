@@ -8,3 +8,6 @@
           a.nav-link href="#" Want
         li.nav-item
           a.nav-link href="#" People
+    .col-12
+      - Item.all.each do |item|
+        p =item.name
