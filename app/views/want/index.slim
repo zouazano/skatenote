@@ -16,10 +16,5 @@
         p ログインすると自分のアイテムを表示できます
         = link_to 'ユーザー登録', new_user_registration_path
         = link_to 'ログイン', new_user_session_path
+    =render 'shared/mypage_footer'
 
-    .col-12.fixed-bottom
-      ul.nav.nav-pills.nav-fill
-        li.nav-item
-          a.nav-link.active href=want_index_path MyPage
-        li.nav-item
-          a.nav-link href=tried_index_path Search
