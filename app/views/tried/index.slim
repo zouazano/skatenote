@@ -1,6 +1,6 @@
 .cotainer
   .row
-    .col-12
+    .col-12.sticky-top
       ul.nav.nav-tabs.nav-fill
         li.nav-item
           a.nav-link.active href=tried_index_path Tried!
@@ -10,9 +10,96 @@
           a.nav-link href="#" People
     .col-12
       - if user_signed_in?
-        - current_user.tried_items.all.each do |item|
+        - current_user.items.all.each do |item|
           p =item.name
       - else
         p ログインすると自分のアイテムを表示できます
         = link_to 'ユーザー登録', new_user_registration_path
         = link_to 'ログイン', new_user_session_path
+
+      br
+      br
+      br
+      br
+      br
+      br
+      br
+      br
+      br
+      br
+      br
+      br
+      br
+      br
+      br
+      br
+      br
+      br
+      br
+      br
+      br
+      br
+      br
+      br
+      br
+      br
+      br
+      br
+      br
+      br
+      br
+      br
+      br
+      br
+      br
+      br
+      br
+      br
+      br
+      br
+      br
+      br
+      br
+      br
+      br
+      br
+      br
+      br
+      br
+      br
+      br
+      br
+      br
+      br
+      br
+      br
+      br
+      br
+      br
+      br
+      br
+      br
+      br
+      br
+      br
+      br
+      br
+      br
+      br
+      br
+      br
+      br
+      br
+      br
+      br
+      br
+      br
+      br
+      br
+      br
+    .col-12.fixed-bottom
+      ul.nav.nav-pills.nav-fill
+        li.nav-item
+          a.nav-link.active href=tried_index_path MyPage
+        li.nav-item
+          a.nav-link href=tried_index_path Search
