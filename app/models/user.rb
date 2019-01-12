@@ -5,5 +5,4 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
   has_many :user_items
   has_many :tried_items, through: :user_items, source: :item
-
 end

@@ -10,7 +10,7 @@
           a.nav-link href="#" People
     .col-12
       - if user_signed_in?
-        - current_user.tried_items.all.each do |item|
+        - current_user.want_items.all.each do |item|
           p =item.name
       - else
         p ログインすると自分のアイテムを表示できます
