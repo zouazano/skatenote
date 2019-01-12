@@ -3,6 +3,8 @@ Rails.application.routes.draw do
 	get 'tried/index'
 	get 'want/index'
 	get 'search/index'
+  
+  resources :items
 
 	root to: "tried#index"
 	get 'top/index'

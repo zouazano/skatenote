@@ -11,10 +11,10 @@
     .col-12
       - if user_signed_in?
         - current_user.wants_items.all.each do |item|
-          p =item.name
+          a href= item_path(item.id)
+            p =item.name
       - else
         p ログインすると自分のアイテムを表示できます
         = link_to 'ユーザー登録', new_user_registration_path
         = link_to 'ログイン', new_user_session_path
     =render 'shared/mypage_footer'
-
