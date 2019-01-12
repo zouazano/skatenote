@@ -5,9 +5,14 @@
         li.nav-item
           a.nav-link.active href=tried_index_path Tried!
         li.nav-item
-          a.nav-link href="#" Want
+          a.nav-link href="#" Want!
         li.nav-item
           a.nav-link href="#" People
     .col-12
-      - Item.all.each do |item|
-        p =item.name
+      - if user_signed_in?
+        - @user.tried_items.all.each do |item|
+          p =item.name
+      - else
+        p ログインすると自分のアイテムを表示できます
+        = link_to 'ユーザー登録', new_user_registration_path
+        = link_to 'ログイン', new_user_session_path
