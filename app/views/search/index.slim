@@ -1,7 +1,7 @@
 .cotainer
   .row
     .col-12
-
-       p うう
-
+      - Item.all.each do |item|
+        a href= item_path(item.id)
+          p =item.name
     = render 'shared/search_footer'

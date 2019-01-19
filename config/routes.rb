@@ -4,7 +4,13 @@ Rails.application.routes.draw do
 	get 'want/index'
 	get 'search/index'
   
-  resources :items
+
+  get 'user_items/create'
+
+  resources :items do
+  	get "user_items/create"
+  end
+
 
 	root to: "tried#index"
 	get 'top/index'

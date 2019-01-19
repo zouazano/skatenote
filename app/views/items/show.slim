@@ -2,4 +2,6 @@
   .row
     .col-12
       p = @item.name
-    = render 'shared/mypage_footer'
+      = link_to item_user_items_create_path(@item), remote: true
+        p 追加
+    = render 'shared/search_footer'
