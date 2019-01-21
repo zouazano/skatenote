@@ -1,7 +1,16 @@
 .cotainer
   .row
     .col-12
-      p = @item.name
-      = link_to item_user_items_create_path(@item), remote: true
-        p 追加
+      - if user_signed_in?
+        p = @item.name
+        - if current_user.items.where(id: @item.id).present?
+          p "試した！"に追加されています！
+          = link_to item_user_items_destroy_path(@item)
+            p 削除
+        -else
+          = link_to item_user_items_create_path(@item)
+            p 追加
+      - else
+        p = @item.name
+
     = render 'shared/search_footer'

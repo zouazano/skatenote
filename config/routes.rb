@@ -9,6 +9,7 @@ Rails.application.routes.draw do
 
   resources :items do
   	get "user_items/create"
+  	get "user_items/destroy"
   end
 
 
