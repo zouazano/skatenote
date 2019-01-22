@@ -3,14 +3,21 @@
     .col-12
       - if user_signed_in?
         p = @item.name
-        - if current_user.items.where(id: @item.id).present?
+        - if current_user.user_items.where(item_id: @item.id).present?
           p "試した！"に追加されています！
           = link_to item_user_items_destroy_path(@item)
             p 削除
         -else
           = link_to item_user_items_create_path(@item)
-            p 追加
-      - else
+            p "試した！"に追加
+        - if current_user.want_items.where(item_id: @item.id).present?
+          p "欲しい！"に追加されています！
+          = link_to item_want_items_destroy_path(@item)
+            p 削除
+        - else
+          = link_to item_want_items_create_path(@item)
+            p "欲しい！"に追加
+      - else 
         p = @item.name
 
     = render 'shared/search_footer'
