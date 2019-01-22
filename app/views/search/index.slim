@@ -4,4 +4,6 @@
       - Item.all.each do |item|
         a href= item_path(item.id)
           p =item.name
+        p 試した！#{item.user_items.count}件
+        p 欲しい！#{item.want_items.count}件
     = render 'shared/search_footer'

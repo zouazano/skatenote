@@ -3,6 +3,8 @@
     .col-12
       - if user_signed_in?
         p = @item.name
+        p 試した！#{@item.user_items.count}件
+        p 欲しい！#{@item.want_items.count}件
         - if current_user.user_items.where(item_id: @item.id).present?
           p "試した！"に追加されています！
           = link_to item_user_items_destroy_path(@item)
