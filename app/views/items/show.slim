@@ -1,10 +1,12 @@
 .cotainer
   .row
     .col-12
+      a href=search_index_path アイテム一覧に戻る
+      
+      p = @item.name
+      p 試した！#{@item.user_items.count}件
+      p 欲しい！#{@item.want_items.count}件
       - if user_signed_in?
-        p = @item.name
-        p 試した！#{@item.user_items.count}件
-        p 欲しい！#{@item.want_items.count}件
         - if current_user.user_items.where(item_id: @item.id).present?
           p "試した！"に追加されています！
           = link_to item_user_items_destroy_path(@item)
@@ -12,6 +14,7 @@
         -else
           = link_to item_user_items_create_path(@item)
             p "試した！"に追加
+
         - if current_user.want_items.where(item_id: @item.id).present?
           p "欲しい！"に追加されています！
           = link_to item_want_items_destroy_path(@item)
@@ -20,6 +23,6 @@
           = link_to item_want_items_create_path(@item)
             p "欲しい！"に追加
       - else 
-        p = @item.name
+        p ログインするとこのアイテムを"試した！"や、"欲しい！"に登録することができます。
 
     = render 'shared/search_footer'

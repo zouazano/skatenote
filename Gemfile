@@ -18,6 +18,8 @@ gem 'uglifier', '>= 1.3.0'
 
 gem 'devise'
 
+gem 'dragonfly', '~> 1.2.0'
+
 gem 'slim-rails'
 
 gem 'bootstrap', '~> 4.1.3'

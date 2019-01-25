@@ -10,7 +10,11 @@ html
   body
     - if user_signed_in?
       /strong= link_to current_user.name, pages_show_path
-      p = current_user.name+'さん'
+      = image_tag current_user.image.thumb('50x50#').url if current_user.image_stored?
+      = current_user.name+'さん' 
+      br/
+      
+
       = link_to 'プロフィール変更', edit_user_registration_path
       = link_to 'ログアウト', destroy_user_session_path, method: :delete
     - else
