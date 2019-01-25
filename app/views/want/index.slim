@@ -7,7 +7,7 @@
         li.nav-item
           a.nav-link.active href=want_index_path 欲しい！
         li.nav-item
-          a.nav-link href="#" People
+          a.nav-link href=user_index_path People
     .col-12
       - if user_signed_in?
         - current_user.wants_items.all.each do |item|

@@ -3,7 +3,10 @@ Rails.application.routes.draw do
   get 'tried/index'
   get 'want/index'
   get 'search/index'
-  
+
+  resources :user
+
+  resources :follow_relationships, only: [:create, :destroy]
 
   get 'user_items/create'
 

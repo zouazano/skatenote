@@ -1,0 +1,14 @@
+.cotainer
+  .row
+    .col-12.sticky-top
+      ul.nav.nav-tabs.nav-fill
+        li.nav-item
+          a.nav-link href=tried_index_path 試した！
+        li.nav-item
+          a.nav-link href=want_index_path 欲しい！
+        li.nav-item
+          a.nav-link.active href=user_index_path People
+    .col-12
+      - User.all.each do |user|
+        a href = user_path(user.id)
+          p = user.name
