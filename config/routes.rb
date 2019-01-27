@@ -4,6 +4,8 @@ Rails.application.routes.draw do
   get 'want/index'
   get 'search/index'
 
+  get 'timeline/index'
+
   resources :user
 
   resources :follow_relationships, only: [:create, :destroy]

@@ -8,7 +8,7 @@
           a.nav-link href=want_index_path 欲しい！
         li.nav-item
           a.nav-link.active href=user_index_path People
-    .col-12
+    .col-12.mb-5
       - User.all.each do |user|
         a href = user_path(user.id)
           p = user.name
