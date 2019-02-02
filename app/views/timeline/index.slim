@@ -1,28 +1,8 @@
 .cotainer
   .row
     .col-12.mb-5
-      - UserItem.where.not(user_id: nil).reverse_each do |user_item|
-        a href = user_path(user_item.user.id)
-          = image_tag user_item.user.image.thumb('50x50#').url if user_item.user.image_stored?
-          span #{user_item.user.name}さん
-        span が
-        a href = item_path(user_item.item.id)
-          span『#{user_item.item.name}』
-        span を"試した！"に追加しました
-        br/
+      - Item.all.each do |item|
+        - item.users.all.each do |user|
+          p = user.name
 
-        a href="https://www.amazon.co.jp/gp/product/B06ZXXTM45/ref=as_li_tl?ie=UTF8&camp=247&creative=1211&creativeASIN=B06ZXXTM45&linkCode=as2&tag=gesopongo-22&linkId=35e9c585f33ac55bf2b2f13b696109fa" target="_blank" 
-          img border="0" src="//ws-fe.amazon-adsystem.com/widgets/q?_encoding=UTF8&MarketPlace=JP&ASIN=B06ZXXTM45&ServiceVersion=20070822&ID=AsinImage&WS=1&Format=_SL250_&tag=gesopongo-22" /
-        img alt="" border="0" height="1" src="//ir-jp.amazon-adsystem.com/e/ir?t=gesopongo-22&l=am2&o=9&a=B06ZXXTM45" style=("border:none !important; margin:0px !important;") width="1" /
-
-        br/
-      - WantItem.where.not(user_id: nil).reverse_each do |want_item|
-        = image_tag want_item.user.image.thumb('50x50#').url if want_item.user.image_stored?
-        a href = user_path(want_item.user.id)
-          span #{want_item.user.name}さん
-        span が
-        a href = item_path(want_item.item.id)
-          span『#{want_item.item.name}』
-        span を"欲しい！"に追加しました
-        br/
     = render 'shared/timeline_footer'
