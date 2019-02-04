@@ -4,6 +4,8 @@
       a href=search_index_path アイテム一覧に戻る
       
       p = @item.name
+      = @item.amazon_id.html_safe if @item.amazon_id.present?
+
       p 試した！#{@item.user_items.count}件
       p 欲しい！#{@item.want_items.count}件
       - if user_signed_in?
