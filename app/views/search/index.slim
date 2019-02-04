@@ -1,7 +1,7 @@
 .cotainer
   .row
-    .col-12
-      - Item.all.each do |item|
+    .col-12.mb-5
+      - Item.order(id: "DESC").each do |item|
         a href= item_path(item.id)
           p =item.name
           = item.amazon_id.slice(212..-1).html_safe if item.amazon_id.present?

@@ -26,5 +26,6 @@ html
       p.notice= notice
     - elsif alert
       p.alert= alert
-    = yield
+    .bg-white
+      = yield
     = render 'shared/footer'

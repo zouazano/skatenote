@@ -2,7 +2,10 @@
   .row
     .col-12.mb-5
       - Item.all.each do |item|
-        - item.users.all.each do |user|
-          p = user.name
-
+        - if item.user_items.first.present?
+          p #{item&.user_items&.first&.user&.name}が#{item.name}を「試した！」に追加しました
+          = item.amazon_id.slice(212..-1).html_safe if item.amazon_id.present?
+        - if item.want_items.first.present?
+          p #{item&.want_items&.first&.user&.name}が#{item.name}を「欲しい！」に追加しました
+      - p Item.last.name
     = render 'shared/timeline_footer'

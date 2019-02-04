@@ -13,75 +13,14 @@
         - current_user.items.all.each do |item|
           a href= item_path(item.id)
             p =item.name
+            = item.amazon_id.slice(212..-1).html_safe if item.amazon_id.present?
+            p 試した！#{item.user_items.count}件
+            p 欲しい！#{item.want_items.count}件
       - else
         p ログインすると自分のアイテムを表示できます
         = link_to 'ユーザー登録', new_user_registration_path
         = link_to 'ログイン', new_user_session_path
 
-      br
-      br
-      br
-      br
-      br
-      br
-      br
-      br
-      br
-      br
-      br
-      br
-      br
-      br
-      br
-      br
-      br
-      br
-      br
-      br
-      br
-      br
-      br
-      br
-      br
-      br
-      br
-      br
-      br
-      br
-      br
-      br
-      br
-      br
-      br
-      br
-      br
-      br
-      br
-      br
-      br
-      br
-      br
-      br
-      br
-      br
-      br
-      br
-      br
-      br
-      br
-      br
-      br
-      br
-      br
-      br
-      br
-      br
-      br
-      br
-      br
-      br
-      br
-      br
       br
       br
       br
