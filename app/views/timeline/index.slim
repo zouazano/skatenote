@@ -1,11 +1,32 @@
 .cotainer
   .row
     .col-12.mb-5
-      - Item.all.each do |item|
+      - Item.all.reverse_each do |item|
         - if item.user_items.first.present?
-          p #{item&.user_items&.first&.user&.name}が#{item.name}を「試した！」に追加しました
-          = item.amazon_id.slice(212..-1).html_safe if item.amazon_id.present?
+          a href = user_path(item.user_items.first.user.id)
+            = image_tag item.user_items.first.user.image.thumb('50x50#').url if item.user_items.first.user.image_stored?
+            span #{item&.user_items&.first&.user&.name}さん
+          span が
+          a href = item_path(item.user_items.first.item.id)
+            span #{item.name}
+          span を「試した！」に追加しました
+          br
+          a href = item_path(item.user_items.first.item.id)
+            = item.amazon_id.slice(212..-1).html_safe if item.amazon_id.present?
+          br
+
         - if item.want_items.first.present?
-          p #{item&.want_items&.first&.user&.name}が#{item.name}を「欲しい！」に追加しました
+          a href = user_path(item.want_items.first.user.id)
+            = image_tag item.want_items.first.user.image.thumb('50x50#').url if item.want_items.first.user.image_stored?
+            span #{item&.want_items&.first&.user&.name}さん
+          span が
+          a href = item_path(item.want_items.first.item.id)
+            span #{item.name}
+          span を「欲しい！」に追加しました
+          br
+          a href = item_path(item.want_items.first.item.id)
+            = item.amazon_id.slice(212..-1).html_safe if item.amazon_id.present?
+          br
       - p Item.last.name
     = render 'shared/timeline_footer'
+
