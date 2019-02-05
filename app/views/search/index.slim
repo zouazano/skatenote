@@ -5,6 +5,10 @@
         a href= item_path(item.id)
           p =item.name
           = item.amazon_id.slice(212..-1).html_safe if item.amazon_id.present?
+          - if UserItem.where(item_id:item.id).present?
+            p = UserItem.where(item_id:item.id).average(:value)
+          - else
+            p -
         p 試した！#{item.user_items.count}件
         p 欲しい！#{item.want_items.count}件
     = render 'shared/search_footer'

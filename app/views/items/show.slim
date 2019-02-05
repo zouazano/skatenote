@@ -6,8 +6,10 @@
       p = @item.name
       = @item.amazon_id.html_safe if @item.amazon_id.present?
 
+      p = UserItem.where(item_id:@item.id).average(:value)
       p 試した！#{@item.user_items.count}件
       p 欲しい！#{@item.want_items.count}件
+
       - if user_signed_in?
         - if current_user.user_items.where(item_id: @item.id).present?
           p "試した！"に追加されています！
@@ -16,6 +18,11 @@
         -else
           = link_to item_user_items_create_path(@item)
             p "試した！"に追加
+        form
+          .form-group
+            label for="formControlRange"  Example Range input
+            input#formControlRange.form-control-range type="range" /
+
 
         - if current_user.want_items.where(item_id: @item.id).present?
           p "欲しい！"に追加されています！
