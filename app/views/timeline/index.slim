@@ -27,6 +27,5 @@
           a href = item_path(item.want_items.first.item.id)
             = item.amazon_id.slice(212..-1).html_safe if item.amazon_id.present?
           br
-      - p Item.last.name
     = render 'shared/timeline_footer'
 

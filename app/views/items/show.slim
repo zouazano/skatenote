@@ -1,6 +1,6 @@
 .cotainer
   .row
-    .col-12
+    .col-12.mb-5
       a href=search_index_path アイテム一覧に戻る
       
       p = @item.name
@@ -33,6 +33,16 @@
             p "欲しい！"に追加
       - else 
         p ログインするとこのアイテムを"試した！"や、"欲しい！"に登録することができます。
+
+      p レビュー一覧
+      - UserItem.where(item_id:@item.id).each do |user_item|
+        a href = user_path(user_item.user.id)
+          = image_tag user_item.user.image.thumb('50x50#').url if user_item.user.image_stored?
+          span #{user_item.user.name}さん
+        p = user_item.value
+        p = user_item.comment
+
+
       
 
     = render 'shared/search_footer'
