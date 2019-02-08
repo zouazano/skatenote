@@ -4,6 +4,7 @@
       a href=search_index_path アイテム一覧に戻る
       
       p = @item.category
+      p = @item.brand&.name
       p = @item.size
       p = @item.name
       = @item.amazon_id.html_safe if @item.amazon_id.present?
