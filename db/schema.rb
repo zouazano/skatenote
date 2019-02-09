@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_02_08_162448) do
+ActiveRecord::Schema.define(version: 2019_02_09_011705) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -55,6 +55,7 @@ ActiveRecord::Schema.define(version: 2019_02_08_162448) do
     t.bigint "item_id"
     t.integer "value"
     t.text "comment"
+    t.string "image_uid"
     t.index ["item_id"], name: "index_user_items_on_item_id"
     t.index ["user_id", "item_id"], name: "index_user_items_on_user_id_and_item_id", unique: true
     t.index ["user_id"], name: "index_user_items_on_user_id"

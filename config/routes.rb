@@ -12,9 +12,12 @@ Rails.application.routes.draw do
 
   get 'user_items/create'
 
+
   resources :items do
-    get "user_items/create"
+    resources :user_items, only: %i[index new create]
+
     get "user_items/destroy"
+  
     get "want_items/create"
     get "want_items/destroy"
   end
