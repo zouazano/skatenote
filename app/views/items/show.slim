@@ -8,7 +8,11 @@
       p = @item.rider&.name
       p = @item.size
       p = @item.name
-      = @item.amazon_id.html_safe if @item.amazon_id.present?
+      - if @item.user_items.where.not(image_uid: nil).present?
+        = image_tag @item&.user_items&.where.not(image_uid: nil).first&.image&.thumb('300x300#').url
+      - else
+        = @item.amazon_id.html_safe if @item.amazon_id.present?
+
 
       p = UserItem.where(item_id:@item.id).average(:value)
       p 試した！#{@item.user_items.count}件
