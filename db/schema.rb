@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_02_09_011705) do
+ActiveRecord::Schema.define(version: 2019_02_09_101405) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -40,6 +40,15 @@ ActiveRecord::Schema.define(version: 2019_02_09_011705) do
     t.float "size"
     t.integer "brand_id"
     t.integer "rider_id"
+  end
+
+  create_table "rider_brands", force: :cascade do |t|
+    t.bigint "brand_id"
+    t.bigint "rider_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["brand_id"], name: "index_rider_brands_on_brand_id"
+    t.index ["rider_id"], name: "index_rider_brands_on_rider_id"
   end
 
   create_table "riders", force: :cascade do |t|
@@ -87,6 +96,8 @@ ActiveRecord::Schema.define(version: 2019_02_09_011705) do
 
   add_foreign_key "follow_relationships", "users"
   add_foreign_key "follow_relationships", "users", column: "follow_id"
+  add_foreign_key "rider_brands", "brands"
+  add_foreign_key "rider_brands", "riders"
   add_foreign_key "user_items", "items"
   add_foreign_key "user_items", "users"
   add_foreign_key "want_items", "items"
