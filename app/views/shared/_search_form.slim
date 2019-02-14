@@ -1,0 +1,12 @@
+= search_form_for(@q, url:items_path) do |f|
+  br
+  = f.label :brand_id_eq, 'ブランド'
+  = f.collection_select :brand_id_eq, @brands, :id, :name, :include_blank => '指定なし'
+  br
+  = f.label :name_cont
+  = f.search_field :name_cont
+  br
+  = f.label :name_cont
+  = f.search_field :name_cont
+  br
+  = f.submit

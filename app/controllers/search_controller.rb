@@ -1,5 +1,16 @@
 class SearchController < ApplicationController
-	def index
-		
-	end
+  def index
+    @q = Item.ransack(params[:q])
+    @items = @q.result(distinct: true)
+  end
+
+  def search
+    @q = Item.search(search_params)
+    @items = @q.result(distinct: true)
+  end
+
+  private
+  def search_params
+    params.require(:q).permit!
+  end
 end
