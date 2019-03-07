@@ -9,7 +9,7 @@
         p アイテムが見つかりませんでした。 
       - @items.each do |item|
         a href= item_path(item.id)
-          p =item.name
+          p =item.category_i18n
           = item.amazon_id.slice(212..-1).html_safe if item.amazon_id.present?
           - if UserItem.where(item_id:item.id).present?
             p = UserItem.where(item_id:item.id).average(:value)

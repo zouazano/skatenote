@@ -18,6 +18,10 @@ gem 'uglifier', '>= 1.3.0'
 
 gem 'devise'
 
+gem 'enum_help'
+gem 'rails-i18n'
+
+
 gem 'dragonfly', '~> 1.2.0'
 
 gem 'slim-rails'
