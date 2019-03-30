@@ -1,13 +1,3 @@
 ja:
   enums:
     item:
-      category:
-        completes: コンプリート
-        decks: デッキ
-        trucks: トラック
-        wheels: ウィール
-        bearings: ベアリング
-        griptape: グリップテープ
-        hardware: ビス
-        shoes: シューズ
-        other: その他
