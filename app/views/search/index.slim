@@ -1,13 +1,12 @@
+= render 'shared/search_form'
 .cotainer
   .row
-    .col-12.mb-5.bg-info
-      a href = items_path
-        p アイテムを探す
-
     .col-12.mb-5
-      - Item.order(id: "DESC").each do |item|
+      h1
+      - if @items.first.nil?
+        p アイテムが見つかりませんでした。 
+      - @items.each do |item|
         a href= item_path(item.id)
-          p =item.name
           = item.amazon_id.slice(212..-1).html_safe if item.amazon_id.present?
           - if UserItem.where(item_id:item.id).present?
             p = UserItem.where(item_id:item.id).average(:value)
@@ -15,6 +14,8 @@
             p -
         p 試した！#{item.user_items.count}件
         p 欲しい！#{item.want_items.count}件
+
+
 
 
     = render 'shared/search_footer'
