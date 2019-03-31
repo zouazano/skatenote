@@ -1,4 +1,7 @@
 = search_form_for(@q, url:items_path) do |f|
+  = f.label :category_id_eq, 'カテゴリ'
+  = f.collection_select :category_id_eq, @categories, :id, :name, :include_blank => '指定なし'
+  br
   = f.label :brand_id_eq, 'ブランド'
   = f.collection_select :brand_id_eq, @brands, :id, :name, :include_blank => '指定なし'
   br
