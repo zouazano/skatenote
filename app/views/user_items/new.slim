@@ -1,16 +1,20 @@
-p = @user.name
+.cotainer
+  .row
+    .col-12.mb-5.border
+      h2 レビュー
+  .row
+    .col-12
+      = form_for @user_item, url: item_user_items_path do |f|
 
-= form_for @user_item, url: item_user_items_path do |f|
+        = f.label :value, "評価"
+        = f.number_field :value
 
-  = f.hidden_field :user_id, value: @user.id
-  = f.hidden_field :user_id, value: @item.id
-
-  = f.file_field :image
-
-  = f.label :value, "評価"
-  = f.number_field :value
-
-  = f.label :comment, "コメント"
-  = f.text_field :comment
-
-  = f.submit "Send"
+        = f.hidden_field :user_id, value: @user.id
+        = f.hidden_field :user_id, value: @item.id
+        br
+        = f.file_field :image
+        br
+        = f.label :comment, "コメント"
+        = f.text_field :comment
+        br
+        = f.submit "Send"

@@ -5,6 +5,15 @@
       h1
       - if @items.first.nil?
         p アイテムが見つかりませんでした。 
+        p = params[:q]["category_id_eq"]
+        p = params[:q]["brand_id_eq"]
+        /p カテゴリ→#{@category.name}
+        /p ブランド→#{@brand.name}
+        p この条件で商品を作成しますか？
+        a href= items_create_path(@category, @brand)
+          p 作る
+
+        
       - @items.each do |item|
         a href= item_path(item.id)
           = item.amazon_id.slice(212..-1).html_safe if item.amazon_id.present?

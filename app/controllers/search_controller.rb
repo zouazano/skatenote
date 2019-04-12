@@ -4,6 +4,8 @@ class SearchController < ApplicationController
     @items = @q.result(distinct: true)
     @categories = Category.all
     @brands = Brand.all
+    #@category = Category.find(params[:q]["category_id_eq"])
+    #@brand = Brand.find(params[:q]["brand_id_eq"])
   end
 
   def search
