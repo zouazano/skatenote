@@ -2,53 +2,68 @@
   .row
     .col-12.mb-5
       a href=search_index_path アイテム一覧に戻る
-      
-      p = @item.category&.name
-      p = @item.brand&.name
-      p = @item.rider&.name
-      p = @item.size
-      p = @item.name
-      = @item.amazon_id.html_safe if @item.amazon_id.present?
+      .row
+        .col-12
+          h1
+            | #{@item.category&.name}/
+            | #{@item.brand&.name}/
+      .row
+        .col-12
+          - if @item.amazon_id.present?
+            = @item.amazon_id.slice(212..-1).html_safe
+          - elsif @item.user_items.where.not(image_uid:nil).first.present?
+            = image_tag @item.user_items.where.not(image_uid:nil).first.image.thumb('110x110#').url
+          - else
+            img alt="bg-image" width="115" height="110" src=asset_path("bg-image")
+      .row
+        .col-6
+          p 評価:#{UserItem.where(item_id:@item.id).average(:value)}
+          p 試した！#{@item.user_items.count}件
+          p 欲しい！#{@item.want_items.count}件
+        .col-6
+
+      .row.border-bottom
+        .col-6
+        .col-6
+          - if user_signed_in?
+            - if current_user.user_items.where(item_id: @item.id).present?
+              = link_to item_user_items_destroy_path(@item)
+                button.btn.btn-primary.m-1.float-right type="button" 試した！
+            - else
+              = link_to new_item_user_item_path(@item)
+                button.btn.btn-none.m-1.float-right type="button" 試した！
 
 
-      p = UserItem.where(item_id:@item.id).average(:value)
-      p 試した！#{@item.user_items.count}件
-      p 欲しい！#{@item.want_items.count}件
+            - if current_user.want_items.where(item_id: @item.id).present?
+              = link_to item_want_items_destroy_path(@item)
+                button.btn.btn-primary.m-1.float-right type="button" 欲しい！
+            - else
+              = link_to item_want_items_create_path(@item)
+                button.btn.btn-none.m-1.float-right type="button" 欲しい！
+          - else 
+            p ログインするとこのアイテムを「試した！」や、「欲しい！」に登録することができます。
+            = link_to 'ユーザー登録', new_user_registration_path
+            br
+            = link_to 'ログイン', new_user_session_path
 
-      - if user_signed_in?
-        - if current_user.user_items.where(item_id: @item.id).present?
-          p "試した！"に追加されています！
-          = link_to item_user_items_destroy_path(@item)
-            p "試した！"から削除
-        - else
-          = link_to new_item_user_item_path(@item)
-            p "試した！"に追加
-        form
-          .form-group
-            label for="formControlRange"  Example Range input
-            input#formControlRange.form-control-range type="range" /
-
-
-        - if current_user.want_items.where(item_id: @item.id).present?
-          p "欲しい！"に追加されています！
-          = link_to item_want_items_destroy_path(@item)
-            p 削除
-        - else
-          = link_to item_want_items_create_path(@item)
-            p "欲しい！"に追加
-      - else 
-        p ログインするとこのアイテムを"試した！"や、"欲しい！"に登録することができます。
-
-      p レビュー一覧
+      h2 スコア・レビュー
       - UserItem.where(item_id:@item.id).each do |user_item|
-        a href = user_path(user_item.user.id)
-          = image_tag user_item.user.image.thumb('50x50#').url if user_item.user.image_stored?
-          span #{user_item.user.name}さん
-        p = user_item.value
-        p = user_item.comment
-        = image_tag user_item.image.thumb('300x300#').url if user_item.image_stored?
-        br/
-
+        .row
+          .col-12
+            a href = user_path(user_item.user.id)
+              = image_tag user_item.user.image.thumb('50x50#').url if user_item.user.image_stored?
+              span #{user_item.user.name}さん
+            .float-right.mr-5
+              small #{Date.today.day - user_item&.created_at.day}日前
+        .row
+          .col-12.border-bottom
+            p = user_item.value
+            p = user_item.comment
+            = image_tag user_item.image.thumb('300x300#').url if user_item.image_stored?
+            br/
+  br
+  br
+  br
 
       
 

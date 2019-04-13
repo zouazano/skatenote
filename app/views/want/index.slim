@@ -18,10 +18,21 @@
         = render 'shared/item_list', item:hoge.item
       - if current_user.want_items.first.nil?
         .col-12.p-5
-          p 気になるアイテムは「欲しい！」に登録しておきましょう。
-        .col-12.bg-white
-          a href=search_index_path 
-            p アイテムを探す！
+          .text-center
+            span 気になるアイテムは
+            span 
+             button.btn.btn-primary.m-1 type="button" 欲しい！
+            span を押してチェックしましょう。
+        .col-12.px-5
+          .text-center
+            img alt="欲しい！" width="300" height="300" src=asset_path("欲しい！")
+        .col-12.p-5.mb-5
+          a href=search_index_path
+            .text-center
+              span 検索は↓の
+              span
+                img alt="検索" height="30" src=asset_path("検索")     
+              span から！ 
     - else
       .col-12
         p ログインすると自分のアイテムを表示できます
