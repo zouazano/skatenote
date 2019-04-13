@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_31_101312) do
+ActiveRecord::Schema.define(version: 2019_04_13_011818) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -46,6 +46,7 @@ ActiveRecord::Schema.define(version: 2019_03_31_101312) do
     t.integer "brand_id"
     t.integer "rider_id"
     t.integer "category_id"
+    t.boolean "authorized", default: false, null: false
   end
 
   create_table "rider_brands", force: :cascade do |t|
