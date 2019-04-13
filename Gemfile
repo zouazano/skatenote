@@ -18,6 +18,8 @@ gem 'uglifier', '>= 1.3.0'
 
 gem 'devise'
 
+gem 'rails_admin'
+
 gem 'enum_help'
 gem 'rails-i18n'
 
