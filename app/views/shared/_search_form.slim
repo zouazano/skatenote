@@ -1,6 +1,6 @@
 .cotainer
   .row
-    .col-12.mb-5.border
+    .col-12.border
       = search_form_for(@q, url:search_index_path) do |f|
         = f.label :category_id_eq, 'カテゴリ'
         = f.collection_select :category_id_eq, @categories, :id, :name, :include_blank => '指定なし'

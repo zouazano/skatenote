@@ -10,17 +10,21 @@ class ItemsController < ApplicationController
 		@item = Item.find(params[:id])
 	end
 
+  def new
+    @item = Item.new
+  end
+
   def create
     @q = Item.ransack(params[:q])
     @items = @q.result(distinct: true)
     @categories = Category.all
     @brands = Brand.all
-    @category = Category.find(params[:q]["category_id_eq"])
-    @brand = Brand.find(params[:q]["brand_id_eq"])
+    #@category = Category.find(params[:q]["category_id_eq"])
+    #@brand = Brand.find(params[:q]["brand_id_eq"])
 
     @item = Item.create(item_params)
     if @item.save
-      redirect_to top_index_path
+      redirect_to item_path(@item)
       flash = 'お問い合せが完了しました。'
     else
       render 'new'
@@ -42,7 +46,7 @@ class ItemsController < ApplicationController
   end
 
   def item_params
-    params.require(:item).permit!
+    params.require(:item).permit(:brand_id, :category_id)
   end
 
 end

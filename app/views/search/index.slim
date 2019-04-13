@@ -2,25 +2,49 @@
 .cotainer
   .row
     .col-12.mb-5
-      h1
+      h1 
+        - unless params[:q]["category_id_eq"] == ""
+          | #{Category.find(params[:q]["category_id_eq"]).name}/
+        - unless params[:q]["brand_id_eq"] == ""
+          | #{Brand.find(params[:q]["brand_id_eq"]).name}
+        |の検索結果
+      /- unless params[:q].nil?
+        h1 #{Category.find(params[:q]["category_id_eq"])&.name}/#{Brand.find(params[:q]["brand_id_eq"])&.name}の検索結果
       - if @items.first.nil?
-        p アイテムが見つかりませんでした。 
-        p = params[:q]["category_id_eq"]
-        p = params[:q]["brand_id_eq"]
+        p アイテムが見つかりませんでした。
+        - unless params[:q]["category_id_eq"] == ""
+          p = Category.find(params[:q]["category_id_eq"]).name
+        - unless params[:q]["brand_id_eq"] == ""
+          p = Brand.find(params[:q]["brand_id_eq"]).name
         /p カテゴリ→#{@category.name}
         /p ブランド→#{@brand.name}
-        p この条件で商品を作成しますか？
-        a href= items_create_path(@category, @brand)
-          p 作る
 
-        
+
+        = form_for @item do |f|
+          = f.hidden_field :category_id, value: params[:q]["category_id_eq"]
+          = f.hidden_field :brand_id, value: params[:q]["brand_id_eq"]
+
+          p この条件でアイテムを作成しますか？
+
+          = f.submit "作成する", class:"form-control mb-3"
+
+    
+
+
+
+
+
       - @items.each do |item|
+        span #{item.category&.name}/
+        span #{item.brand&.name}/
+        span #{item.size}
+        br
         a href= item_path(item.id)
           = item.amazon_id.slice(212..-1).html_safe if item.amazon_id.present?
           - if UserItem.where(item_id:item.id).present?
-            p = UserItem.where(item_id:item.id).average(:value)
+            p 評価:#{UserItem.where(item_id:item.id).average(:value)}
           - else
-            p -
+            p 評価:-
         p 試した！#{item.user_items.count}件
         p 欲しい！#{item.want_items.count}件
 

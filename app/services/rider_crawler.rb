@@ -4,6 +4,25 @@ require 'csv'
 
 
 class RiderCrawler
+  def self.item_create
+
+=begin
+    [221,222,224,227,231,235,236,237,240,249,257,261,265,266,277,279,283,287,291,298,314,327,329,].each do |hoga|
+      Brand.find(hoga).each do |hoge|
+        p hoge.name
+      end
+    end
+=end 
+    Brand.all.each do |hoge|
+      p [hoge.name, hoge.id]
+    end
+
+    n = 7.5
+    n.step(8.3, 0.1).to_a.each do |hoge|
+      p hoge
+    end
+  end
+
   def self.crawl
     
     url = "https://www.tactics.com/pros"
