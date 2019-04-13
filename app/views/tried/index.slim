@@ -4,12 +4,24 @@
     .col-12.sticky-top
       ul.nav.nav-tabs.nav-fill
         li.nav-item
-          a.nav-link.active href=tried_index_path 試した！
+          a.nav-link.active href=tried_index_path 
+           span 試した！
+           - if user_signed_in?
+             span #{current_user.user_items.count}件
         li.nav-item
-          a.nav-link href=want_index_path 欲しい！
+          a.nav-link href=want_index_path 
+           span 欲しい！
+           - if user_signed_in?
+             span #{current_user.want_items.count}件
     - if user_signed_in?
       - current_user.want_items.all.each do |hoge|
         = render 'shared/item_list', item:hoge.item
+      - if current_user.user_items.first.nil?
+        .col-12.p-5
+          p アイテムを使ったら「試した！」に登録して、スコアをつけたりレビューを残しましょう。
+        .col-12.bg-white
+          a href=search_index_path 
+            p アイテムを探す！
     - else
       .col-12
         p ログインすると自分のアイテムを表示できます
