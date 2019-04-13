@@ -1,29 +1,42 @@
 .cotainer
   .row
-    .col-12.mb-5.border
+    .col-12.mb-5.border.bg-white
       h2 レビュー
   .row
-    .col-12
-      = form_for @user_item, url: item_user_items_path do |f|
+    .col-12.bg-white
+      .row
+        .col-12.mb-3
+          = form_for @user_item, url: item_user_items_path do |f|
 
-        = f.label :value, "スコア"
-        = f.number_field :value, min:"0", step:"0.1", max:"5"
+            = f.label :value, "スコア", class:'control-label'
+            = f.number_field :value, min:"0", step:"0.1", max:"5", class:'form-control'
+            .row.mt-5
+              .col-12
+            /br
+            /label for="value" スコア
+            /input#value.custom-range max="5" min="0" type="range" value="0" step="0.1" /
 
-        /form
-          .form-group
-            label for="value" スコア
-            input#formControlRange.form-control-range max="5" min="0" step="0.1" type="range" value="0"
+            /form
+              .form-group
+                label for="value" スコア
+                input#formControlRange.form-control-range max="5" min="0" step="0.1" type="range" value="0"
 
+            = f.hidden_field :user_id, value: @user.id
+            = f.hidden_field :user_id, value: @item.id
+            = f.label :image, "画像"
+            .row
+              .col-12
+            = f.file_field :image, class:'form-control'
+            .row.mt-5
+              .col-12
+            = f.label :comment, "コメント", class:'control-label'
+            .row
+              .col-12
+            = f.text_area :comment, class:'form-control'
 
-        = f.hidden_field :user_id, value: @user.id
-        = f.hidden_field :user_id, value: @item.id
-        br
-        = f.file_field :image
-        br
-        = f.label :comment, "コメント"
-        = f.text_field :comment
-        br
-        = f.submit "投稿"
+            .row.my-5
+              .col-12
+            = f.submit "投稿", class:'form-control'
 
   br
   br
