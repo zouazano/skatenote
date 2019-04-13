@@ -13,6 +13,7 @@
                   small #{Date.today.day - item&.user_items.last.created_at.day}日前
             .row
                 .col-7
+                  span スコア:
                   span = item.user_items.last.value
                   br
                   span = item.user_items.last.comment

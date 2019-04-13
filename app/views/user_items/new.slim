@@ -6,8 +6,14 @@
     .col-12
       = form_for @user_item, url: item_user_items_path do |f|
 
-        = f.label :value, "評価"
-        = f.number_field :value
+        = f.label :value, "スコア"
+        = f.number_field :value, min:"0", step:"0.1", max:"5"
+
+        /form
+          .form-group
+            label for="value" スコア
+            input#formControlRange.form-control-range max="5" min="0" step="0.1" type="range" value="0"
+
 
         = f.hidden_field :user_id, value: @user.id
         = f.hidden_field :user_id, value: @item.id
@@ -17,4 +23,10 @@
         = f.label :comment, "コメント"
         = f.text_field :comment
         br
-        = f.submit "Send"
+        = f.submit "投稿"
+
+  br
+  br
+  br
+
+      
