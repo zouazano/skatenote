@@ -3,29 +3,56 @@
     .col-12.mb-5
       - Item.all.reverse_each do |item|
         - if item.user_items.last.present?
-          a href = user_path(item.user_items.last.user.id)
-            = image_tag item.user_items.last.user.image.thumb('50x50#').url if item.user_items.last.user.image_stored?
-            span #{item&.user_items&.last&.user&.name}さん
-          span が
-          a href = item_path(item.user_items.last.item.id)
-            span #{item.name}
-          span を「試した！」に追加しました
-          br
-          a href = item_path(item.user_items.last.item.id)
-            = item.amazon_id.slice(212..-1).html_safe if item.amazon_id.present?
-          br
+          .border.border-light.bg-white.mt-1
+            .row
+              .col-12
+                a href = user_path(item.user_items.last.user.id)
+                  = image_tag item.user_items.last.user.image.thumb('50x50#').url if item.user_items.last.user.image_stored?
+                  span #{item&.user_items&.last&.user&.name}さん
+                .float-right.mr-5
+                  small #{Date.today.day - item&.user_items.last.created_at.day}日前
+            .row
+                .col-7
+                  span = item.user_items.last.value
+                  br
+                  span = item.user_items.last.comment
+                .col-5
+                  .row.p-0
+                    a href= item_path(item.id)
+                      - if item.user_items.where.not(image_uid:nil).first.present?
+                        = image_tag item.user_items.where.not(image_uid:nil).first.image.thumb('110x110#').url
+                      - elsif item.amazon_id.present?
+                        = item.amazon_id.slice(212..-1).html_safe
+                      - else
+                        img alt="bg-image" width="115" height="110" src=asset_path("bg-image")
+                      br
+                  a href= item_path(item.id)
+                    small.text-body #{item.category&.name}
+                    br
+                    small.text-body #{item.brand&.name}
+                    br
+                      - if UserItem.where(item_id:item.id).present?
+                        p.text-primary 評価:#{UserItem.where(item_id:item.id).average(:value)}
+                      - else
+                        p.text-primary 評価:-
+                    span.text-primary 試した！#{item.user_items.count}件
+                    br
+                    span.text-primary 欲しい！#{item.want_items.count}件
 
         - if item.want_items.first.present?
-          a href = user_path(item.want_items.first.user.id)
-            = image_tag item.want_items.first.user.image.thumb('50x50#').url if item.want_items.first.user.image_stored?
-            span #{item&.want_items&.first&.user&.name}さん
-          span が
-          a href = item_path(item.want_items.first.item.id)
-            span #{item.name}
-          span を「欲しい！」に追加しました
-          br
-          a href = item_path(item.want_items.first.item.id)
-            = item.amazon_id.slice(212..-1).html_safe if item.amazon_id.present?
-          br
+          .border.border-light.bg-white.mt-1
+            a href = user_path(item.want_items.first.user.id)
+              = image_tag item.want_items.first.user.image.thumb('50x50#').url if item.want_items.first.user.image_stored?
+              span #{item&.want_items&.first&.user&.name}さん
+            br
+            a href = item_path(item.want_items.first.item.id)
+              span #{item&.category&.name}/#{item&.brand&.name}
+            span を「欲しい！」に追加しました!
+      br
+      br
+      br
+      br
+      br
+
     = render 'shared/timeline_footer'
 

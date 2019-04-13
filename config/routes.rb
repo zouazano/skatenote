@@ -7,7 +7,9 @@ Rails.application.routes.draw do
 
   get 'timeline/index'
 
-  resources :user
+  resources :user do
+    get "want_items"
+  end
 
   resources :follow_relationships, only: [:create, :destroy]
 

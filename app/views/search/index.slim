@@ -1,14 +1,13 @@
 = render 'shared/search_form'
 .cotainer
   .row
-    .col-12.mb-5
+    .col-12
       h1
         - unless params[:q].nil?
           - unless params[:q]["category_id_eq"] == ""
             | #{Category.find(params[:q]["category_id_eq"]).name}/
           - unless params[:q]["brand_id_eq"] == ""
             | #{Brand.find(params[:q]["brand_id_eq"]).name}
-        |検索結果
       /- unless params[:q].nil?
         h1 #{Category.find(params[:q]["category_id_eq"])&.name}/#{Brand.find(params[:q]["brand_id_eq"])&.name}の検索結果
       - if @items.first.nil?
@@ -29,26 +28,12 @@
 
           = f.submit "作成する", class:"form-control mb-3"
 
+    - @items.each do |item|
+      = render 'shared/item_list', item:item
     
-
-
-
-
-
-      - @items.each do |item|
-        span #{item.category&.name}/
-        span #{item.brand&.name}/
-        span #{item.size}
-        br
-        a href= item_path(item.id)
-          = item.amazon_id.slice(212..-1).html_safe if item.amazon_id.present?
-          - if UserItem.where(item_id:item.id).present?
-            p 評価:#{UserItem.where(item_id:item.id).average(:value)}
-          - else
-            p 評価:-
-        p 試した！#{item.user_items.count}件
-        p 欲しい！#{item.want_items.count}件
-
+    
+  br
+  br
 
 
 

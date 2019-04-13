@@ -1,0 +1,22 @@
+.col-4.border.border-light.bg-white
+  .row.p-0
+    a href= item_path(item.id)
+      - if item.user_items.where.not(image_uid:nil).first.present?
+        = image_tag item.user_items.where.not(image_uid:nil).first.image.thumb('110x110#').url
+      - elsif item.amazon_id.present?
+        = item.amazon_id.slice(212..-1).html_safe
+      - else
+        img alt="bg-image" width="115" height="110" src=asset_path("bg-image")
+      br
+  a href= item_path(item.id)
+    small.text-body #{item.category&.name}
+    br
+    small.text-body #{item.brand&.name}
+    br
+      - if UserItem.where(item_id:item.id).present?
+        p.text-primary 評価:#{UserItem.where(item_id:item.id).average(:value)}
+      - else
+        p.text-primary 評価:-
+    span.text-primary 試した！#{item.user_items.count}件
+    br
+    span.text-primary 欲しい！#{item.want_items.count}件

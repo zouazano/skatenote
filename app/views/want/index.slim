@@ -1,24 +1,20 @@
 = render 'shared/mypage_header'
 .cotainer
   .row
-    .col-12
+    .col-12.sticky-top
       ul.nav.nav-tabs.nav-fill
         li.nav-item
           a.nav-link href=tried_index_path 試した！
         li.nav-item
           a.nav-link.active href=want_index_path 欲しい！
-        li.nav-item
-          a.nav-link href=user_index_path People
-    .col-12.mb-5
-      - if user_signed_in?
-        - current_user.wants_items.all.each do |item|
-          a href= item_path(item.id)
-            p =item.name
-            = item.amazon_id.slice(212..-1).html_safe if item.amazon_id.present?
-          p 試した！#{item.user_items.count}件
-          p 欲しい！#{item.want_items.count}件
-      - else
+    - if user_signed_in?
+      - current_user.want_items.all.each do |hoge|
+        = render 'shared/item_list', item:hoge.item
+    - else
+      .col-12
         p ログインすると自分のアイテムを表示できます
         = link_to 'ユーザー登録', new_user_registration_path
+        br
         = link_to 'ログイン', new_user_session_path
+        
     =render 'shared/mypage_footer'

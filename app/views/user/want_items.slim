@@ -4,11 +4,11 @@
     .col-12.sticky-top
       ul.nav.nav-tabs.nav-fill
         li.nav-item
-          a.nav-link.active href=user_path(@user) 試した！
+          a.nav-link href=user_path(@user) 試した！
         li.nav-item
-          a.nav-link href=user_want_items_path(@user) 欲しい！
+          a.nav-link.active href=user_want_items_path(@user) 欲しい！
 
-    - @user.user_items.all.each do |hoge|
+    - @user.want_items.all.each do |hoge|
       = render 'shared/item_list', item:hoge.item
       
     = render 'shared/timeline_footer'
