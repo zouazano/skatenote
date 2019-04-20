@@ -1,7 +1,7 @@
 = render 'shared/mypage_header'
-.cotainer
+.container
   .row
-    .col-12.sticky-top
+    .col-12.p-0
       ul.nav.nav-tabs.nav-fill
         li.nav-item
           a.nav-link.active href=tried_index_path 
@@ -17,22 +17,22 @@
       - current_user.user_items.all.each do |hoge|
         = render 'shared/item_list', item:hoge.item
       - if current_user.user_items.first.nil?
-        .col-12.p-5
+        .col-12.p-3
           .text-center
             span アイテムを使ったら
             span 
               button.btn.btn-primary.m-1 type="button" 試した！
             span を押して、スコアをつけたりレビューを残しましょう。
-        .col-12.px-5
+        .col-12
           .text-center
             img alt="試した！" width="300" height="340" src=asset_path("試した！")
         .col-12.p-5
           a href=search_index_path
             .text-center
-              span 検索は↓の
+              span まずはアイテムを↓の
               span
                 img alt="検索" height="30" src=asset_path("検索")     
-              span から！ 
+              span から探そう！ 
 
         
 

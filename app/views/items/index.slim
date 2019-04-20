@@ -1,4 +1,4 @@
-.cotainer
+.container
   .row
     .col-12
       = render 'shared/search_form'
@@ -9,7 +9,7 @@
         p アイテムが見つかりませんでした。 
       - @items.each do |item|
         a href= item_path(item.id)
-          = item.amazon_id.slice(212..-1).html_safe if item.amazon_id.present?
+          = item.amazon_id.slice(212..-194).html_safe if item.amazon_id.present?
           - if UserItem.where(item_id:item.id).present?
             p = UserItem.where(item_id:item.id).average(:value)
           - else

@@ -15,11 +15,11 @@
 
 @import "bootstrap";
 
-@import "simple-slider.css";
-
 body {
     -webkit-text-size-adjust: 100%;
     background-color: #f8f9fa;
+    color: #000000;
+    
     
 }
 
@@ -27,4 +27,10 @@ body {
   color: #fff;
   background-color: rgba(0, 123, 255, 0.39);
   border-color: rgba(0, 123, 255, 0.39);
+}
+
+.btn-tag{
+	color: #007bff;
+	border-color: #007bff;
+	background-color: white;
 }

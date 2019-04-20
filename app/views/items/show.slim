@@ -1,31 +1,31 @@
-.cotainer
+.container
   .row
-    .col-12.bg-white.border-bottom
-      a href=search_index_path アイテム一覧に戻る
+    .col-12.bg-white
+      a href=search_index_path 
+        span.text-primary ◀アイテム一覧
   .row
-    .col-12.mb-5.bg-white
-      .row
-        .col-12
-          h1
-            | #{@item.category&.name}/
-            | #{@item.brand&.name}/
-      .row
-        .col-12
-          - if @item.amazon_id.present?
-            = @item.amazon_id.slice(212..-1).html_safe
-          - elsif @item.user_items.where.not(image_uid:nil).first.present?
-            = image_tag @item.user_items.where.not(image_uid:nil).first.image.thumb('110x110#').url
-          - else
-            img alt="bg-image" width="115" height="110" src=asset_path("bg-image")
+    .col-12.mb-3.bg-white
+      h1
+        | #{@item.category&.name}/
+        | #{@item.brand&.name}
+      /- if @item.amazon_id.present?
+        = @item.amazon_id.slice(212..-194).html_safe
+      - if @item.user_items.where.not(image_uid:nil).first.present?
+        = image_tag @item.user_items.where.not(image_uid:nil).first.image.thumb('110x110#').url
+      - else
+        img alt="bg-image" width="115" height="110" src=asset_path("bg-image")
       .row
         .col-6
-          p 評価:#{UserItem.where(item_id:@item.id).average(:value)}
-          p 試した！#{@item.user_items.count}件
-          p 欲しい！#{@item.want_items.count}件
-        .col-6
-
-      .row.border-bottom
-        .col-6
+          img alt="star" width="20" height="20" src=asset_path("star.png")
+          span.text-warning #{UserItem.where(item_id:@item.id).average(:value)}
+          br
+          button.btn-tag.btn-sm.py-0.px-1.d-inline type="button"
+            span 試した！
+          small.text-primary  #{@item.user_items.count}
+          br
+          button.btn-tag.btn-sm.py-0.px-1.d-inline type="button"
+            span 欲しい！
+          small.text-primary  #{@item.want_items.count}
         .col-6
           - if user_signed_in?
             - if current_user.user_items.where(item_id: @item.id).present?
@@ -34,7 +34,6 @@
             - else
               = link_to new_item_user_item_path(@item)
                 button.btn.btn-none.m-1.float-right type="button" 試した！
-
 
             - if current_user.want_items.where(item_id: @item.id).present?
               = link_to item_want_items_destroy_path(@item)
@@ -47,22 +46,25 @@
             = link_to 'ユーザー登録', new_user_registration_path
             br
             = link_to 'ログイン', new_user_session_path
-
+  .row
+    .col-12.bg-white
       h2 スコア・レビュー
-      - UserItem.where(item_id:@item.id).each do |user_item|
-        .row
-          .col-12
-            a href = user_path(user_item.user.id)
-              = image_tag user_item.user.image.thumb('50x50#').url if user_item.user.image_stored?
-              span #{user_item.user.name}さん
-            .float-right.mr-5
-              small #{Date.today.day - user_item&.created_at.day}日前
-        .row
-          .col-12.border-bottom
-            p = user_item.value
-            p = user_item.comment
-            = image_tag user_item.image.thumb('300x300#').url if user_item.image_stored?
-            br/
+      - UserItem.where(item_id:@item.id).order("created_at DESC").each do |user_item|
+        .border-bottom.py-3
+          a href = user_path(user_item.user.id)
+            = image_tag user_item.user.image.thumb('50x50#').url if user_item.user.image_stored?
+            span.text-body.font-weight-bold #{user_item.user.name}
+            .float-right.mr-4
+              small.text-secondary #{Date.today.day - user_item.created_at.day}日
+          br
+          img alt="star" width="20" height="20" src=asset_path("star.png")
+          span.text-warning = user_item.value
+          br
+          br
+          = simple_format(user_item.comment)
+          br
+          = image_tag user_item.image.thumb('200x200#').url if user_item.image_stored?
+          br/
   br
   br
   br

@@ -1,55 +1,72 @@
-.cotainer
+.container
   .row
     .col-12.mb-5
-      - Item.all.reverse_each do |item|
-        - if item.user_items.last.present?
-          .border.border-light.bg-white.mt-1
+      - @hogas.sort_by {|hoga| hoga.created_at }.reverse.each do |hoga|
+        - if hoga.methods.include?(:value)
+          .border.bg-white.my-2.p-1.shadow-sm.bg-white.rounded
             .row
               .col-12
-                a href = user_path(item.user_items.last.user.id)
-                  = image_tag item.user_items.last.user.image.thumb('50x50#').url if item.user_items.last.user.image_stored?
-                  span #{item&.user_items&.last&.user&.name}さん
-                .float-right.mr-5
-                  small #{Date.today.day - item&.user_items.last.created_at.day}日前
+                a href = user_path(hoga.user.id)
+                  = image_tag hoga.user.image.thumb('50x50#').url if hoga.user.image_stored?
+                  span.text-body.font-weight-bold #{hoga.user.name}
+                .float-right.mr-4
+                  small.text-secondary #{Date.today.day - hoga.created_at.day}日
             .row
                 .col-7
-                  span スコア:
-                  span = item.user_items.last.value
+                  a href = item_path(hoga.item.id)
+                    span #{hoga.item&.category&.name}/#{hoga.item&.brand&.name}
                   br
-                  span = item.user_items.last.comment
+                  span を「試した！」
+                  br
+                  img alt="star" width="20" height="20" src=asset_path("star.png")
+                  span.text-warning = hoga.value
+                  br
+                  br
+                  = simple_format(hoga.comment)
                 .col-5
-                  .row.p-0
-                    a href= item_path(item.id)
-                      - if item.user_items.where.not(image_uid:nil).first.present?
-                        = image_tag item.user_items.where.not(image_uid:nil).first.image.thumb('110x110#').url
-                      - elsif item.amazon_id.present?
-                        = item.amazon_id.slice(212..-1).html_safe
+                  .card.shadow-sm.bg-white.rounded.my-1
+                    a href= item_path(hoga.item.id)
+                      - if hoga.item.user_items.where.not(image_uid:nil).first.present?
+                        = image_tag hoga.item.user_items.where.not(image_uid:nil).first.image.thumb('200x200#').url, class:'img-fluid'
+                      /- elsif item.amazon_id.present?
+                        = item.amazon_id.slice(212..-194).html_safe
                       - else
-                        img alt="bg-image" width="115" height="110" src=asset_path("bg-image")
+                        img.img-fluid alt="bg-image" width="200" height="200" src=asset_path("bg-image")
                       br
-                  a href= item_path(item.id)
-                    small.text-body #{item.category&.name}
-                    br
-                    small.text-body #{item.brand&.name}
-                    br
-                      - if UserItem.where(item_id:item.id).present?
-                        p.text-primary 評価:#{UserItem.where(item_id:item.id).average(:value)}
-                      - else
-                        p.text-primary 評価:-
-                    span.text-primary 試した！#{item.user_items.count}件
-                    br
-                    span.text-primary 欲しい！#{item.want_items.count}件
+                      small.text-body #{hoga.item.category&.name}
+                      br
+                      small.text-body #{hoga.item.brand&.name}
+                      br
+                        - if UserItem.where(item_id:hoga.item.id).present?
+                          img alt="star" width="20" height="20" src=asset_path("star.png")
+                          span.text-warning #{UserItem.where(item_id:hoga.item.id).average(:value)}
+                        - else
+                          img alt="star" width="20" height="20" src=asset_path("star.png")
+                          span.text-warning -
+                      button.btn-tag.btn-sm.py-0.px-1.d-inline type="button"
+                        span 試した！
+                      small.text-primary  #{hoga.item.user_items.count}
+                      br
+                      button.btn-tag.btn-sm.py-0.px-1.d-inline type="button"
+                        span 欲しい！
+                      small.text-primary  #{hoga.item.want_items.count}
+        - else 
+          .border.bg-white.my-2.p-1.shadow-sm.bg-white.rounded
+            .row
+              .col-12
+                a href = user_path(hoga.user.id)
+                  = image_tag hoga.user.image.thumb('50x50#').url if hoga.user.image_stored?
+                  span.text-body.font-weight-bold #{hoga.user.name}
+                .float-right.mr-4
+                  small.text-secondary #{Date.today.day - hoga.created_at.day}日
+            .row
+              .col-10
+                a href = item_path(hoga.item.id)
+                  span #{hoga.item&.category&.name}/#{hoga.item&.brand&.name}
+                span を「欲しい！」に追加!
 
-        - if item.want_items.first.present?
-          .border.border-light.bg-white.mt-1
-            a href = user_path(item.want_items.first.user.id)
-              = image_tag item.want_items.first.user.image.thumb('50x50#').url if item.want_items.first.user.image_stored?
-              span #{item&.want_items&.first&.user&.name}さん
-            br
-            a href = item_path(item.want_items.first.item.id)
-              span #{item&.category&.name}/#{item&.brand&.name}
-            span を「欲しい！」に追加しました!
-      br
+        
+
       br
       br
       br

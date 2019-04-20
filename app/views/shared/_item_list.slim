@@ -1,22 +1,28 @@
-.col-4.border.border-light.bg-white
-  .row.p-0
+.col-4.col-sm-3.col-md-2.p-1
+  .card.shadow-sm.bg-white.rounded.my-1
     a href= item_path(item.id)
       - if item.user_items.where.not(image_uid:nil).first.present?
-        = image_tag item.user_items.where.not(image_uid:nil).first.image.thumb('110x110#').url
-      - elsif item.amazon_id.present?
-        = item.amazon_id.slice(212..-1).html_safe
+        = image_tag item.user_items.where.not(image_uid:nil).first.image.thumb('200x200#').url, class:'img-fluid'
+      /- elsif item.amazon_id.present?
+        = item.amazon_id.slice(212..-194).html_safe
       - else
-        img alt="bg-image" width="115" height="110" src=asset_path("bg-image")
+        img.img-fluid alt="bg-image" width="200" height="200" src=asset_path("bg-image")
       br
-  a href= item_path(item.id)
-    small.text-body #{item.category&.name}
-    br
-    small.text-body #{item.brand&.name}
-    br
-      - if UserItem.where(item_id:item.id).present?
-        p.text-primary 評価:#{UserItem.where(item_id:item.id).average(:value)}
-      - else
-        p.text-primary 評価:-
-    span.text-primary 試した！#{item.user_items.count}件
-    br
-    span.text-primary 欲しい！#{item.want_items.count}件
+      small.text-body #{item.category&.name}
+      br
+      small.text-body #{item.brand&.name}
+      br
+        - if UserItem.where(item_id:item.id).present?
+          img alt="star" width="20" height="20" src=asset_path("star.png")
+          span.text-warning #{UserItem.where(item_id:item.id).average(:value)}
+        - else
+          img alt="star" width="20" height="20" src=asset_path("star.png")
+          span.text-warning -
+      button.btn-tag.btn-sm.py-0.px-1.d-inline type="button"
+        span 試した！
+      small.text-primary  #{item.user_items.count}
+      br
+      button.btn-tag.btn-sm.py-0.px-1.d-inline type="button"
+        span 欲しい！
+      small.text-primary  #{item.want_items.count}
+
