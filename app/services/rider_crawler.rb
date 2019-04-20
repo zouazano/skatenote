@@ -53,8 +53,8 @@ class RiderCrawler
     end
     doc = Nokogiri::HTML.parse(html, nil, charset)
 
-    doc.xpath('/html/body/div[3]/div[2]/div[2]/div[position()<4]').each do |node|
-      node.xpath('a').each do |saru|
+    doc.xpath('/html/body/div[4]/div[2]/div[2]/div').each do |hoge|
+      hoge.xpath('a').each do |saru|
         Brand.create(name: saru.inner_text)
       end
     end
