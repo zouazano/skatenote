@@ -63,7 +63,7 @@ class RiderCrawler
   def self.hoga
     
     Item.where(category_id:1).each do |hoge|
-      p hoge.id
+      Item.create(category_id:8, brand_id:hoge.brand_id)
     end
   end
 
