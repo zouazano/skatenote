@@ -3,7 +3,7 @@ class SearchController < ApplicationController
     @q = Item.ransack(params[:q])
     @items = @q.result(distinct: true)
     @categories = Category.all
-    @brands = Brand.all
+    @brands = Brand.order('name ASC').all
     @item = Item.new
 
     #@category = Category.find(params[:q]["category_id_eq"])
