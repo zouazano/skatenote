@@ -83,6 +83,9 @@ GEM
       railties (>= 4.1.0, < 6.0)
       responders
       warden (~> 1.2.3)
+    devise-i18n (1.7.2)
+      devise (>= 4.5)
+    devise-i18n-views (0.3.7)
     dragonfly (1.2.0)
       addressable (~> 2.3)
       multi_json (~> 1.0)
@@ -271,6 +274,8 @@ DEPENDENCIES
   byebug
   coffee-rails (~> 4.2)
   devise
+  devise-i18n
+  devise-i18n-views
   dragonfly (~> 1.2.0)
   enum_help
   jbuilder (~> 2.5)
