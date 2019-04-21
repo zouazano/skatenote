@@ -33,7 +33,7 @@ class UserItemsController < ApplicationController
   private
 
   def user_item_params
-    params[:user_item].permit(:value, :comment, :image)
+    params[:user_item].permit(:value, :comment, :image, :name, :size, :shop)
   end
 
 

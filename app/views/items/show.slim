@@ -17,7 +17,7 @@
       .row
         .col-6
           img alt="star" width="20" height="20" src=asset_path("star.png")
-          span.text-warning #{UserItem.where(item_id:@item.id).average(:value)}
+          span.text-warning #{UserItem.where(item_id:@item.id).average(:value).round(1)}
           br
           button.btn-tag.btn-sm.py-0.px-1.d-inline type="button"
             span 試した！
@@ -60,6 +60,11 @@
           img alt="star" width="20" height="20" src=asset_path("star.png")
           span.text-warning = user_item.value
           br
+          small.text-secondary ・#{user_item.name}
+          br
+          small.text-secondary ・#{user_item.size}
+          br
+          small.text-secondary ・#{user_item.shop}
           br
           = simple_format(user_item.comment)
           br

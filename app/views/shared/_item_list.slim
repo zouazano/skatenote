@@ -14,7 +14,7 @@
       br
         - if UserItem.where(item_id:item.id).present?
           img alt="star" width="20" height="20" src=asset_path("star.png")
-          span.text-warning #{UserItem.where(item_id:item.id).average(:value)}
+          span.text-warning #{UserItem.where(item_id:item.id).average(:value).round(1)}
         - else
           img alt="star" width="20" height="20" src=asset_path("star.png")
           span.text-warning -
