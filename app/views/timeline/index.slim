@@ -25,7 +25,7 @@
                   = simple_format(hoga.comment)
                 .col-5
                   .card.shadow-sm.bg-white.rounded.my-1
-                    a href= item_path(hoga.item.id)
+                    a.folder href= item_path(hoga.item.id)
                       - if hoga.item.amazon_id.present?
                         = hoga.item.amazon_id.slice(/.img................................................................................................................................................................................./).sub(/img/, 'img class = "img-fluid" height="200" width="200"').html_safe
                       - elsif hoga.item.user_items.where.not(image_uid:nil).first.present?
@@ -35,7 +35,7 @@
                       br
                       small.text-body #{hoga.item.category&.name}
                       br
-                      small.text-body #{hoga.item.brand&.name}
+                      small.brand-name.text-body #{hoga.item.brand&.name}
                       br
                         - if UserItem.where(item_id:hoga.item.id).present?
                           img alt="star" width="20" height="20" src=asset_path("star.png")

@@ -1,6 +1,6 @@
 .col-4.col-sm-3.col-md-2.p-1
   .card.shadow-sm.bg-white.rounded.my-1
-    a href= item_path(item.id)
+    a.folder href= item_path(item.id)
       - if item.amazon_id.present?
         = item.amazon_id.slice(/.img................................................................................................................................................................................./).sub(/img/, 'img class = "img-fluid" height="200" width="200"').html_safe
       - elsif item.user_items.where.not(image_uid:nil).first.present?

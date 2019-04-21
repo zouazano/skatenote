@@ -24,7 +24,7 @@
 
               = f.submit "作成する", class:"form-control mb-3"
 
-    - @items.each do |item|
+    - @items.sort_by {|item| item.updated_at }.reverse.each do |item|
       = render 'shared/item_list', item:item
     
     
