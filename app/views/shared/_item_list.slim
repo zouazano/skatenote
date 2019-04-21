@@ -10,7 +10,7 @@
       br
       small.text-body #{item.category&.name}
       br
-      small.text-body #{item.brand&.name}
+      small.brand-name.text-body #{item.brand&.name}
       br
         - if UserItem.where(item_id:item.id).present?
           img alt="star" width="20" height="20" src=asset_path("star.png")

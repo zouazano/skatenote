@@ -29,6 +29,12 @@ body {
   border-color: rgba(0, 123, 255, 0.39);
 }
 
+.brand-name{
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 .btn-tag{
 	color: #007bff;
 	border-color: #007bff;
