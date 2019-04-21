@@ -9,6 +9,6 @@
           a.nav-link href=user_want_items_path(@user) 欲しい！#{@user.want_items.count}件
 
     - @user.user_items.all.each do |hoge|
-      = render 'shared/item_list', item:hoge.item
+      = render 'shared/user_item_list', user_item:hoge
       
     = render 'shared/timeline_footer'

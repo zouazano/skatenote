@@ -31,10 +31,10 @@
                 .col-5
                   .card.shadow-sm.bg-white.rounded.my-1
                     a.folder href= item_path(hoga.item.id)
-                      - if hoga.item.amazon_id.present?
-                        = hoga.item.amazon_id.slice(/.img................................................................................................................................................................................./).sub(/img/, 'img class = "img-fluid" height="200" width="200"').html_safe
-                      - elsif hoga.item.user_items.where.not(image_uid:nil).first.present?
+                      - if hoga.item.user_items.where.not(image_uid:nil).first.present?
                         = image_tag hoga.item.user_items.where.not(image_uid:nil).first.image.thumb('200x200#').url, class:'img-fluid'
+                      - elsif hoga.item.amazon_id.present?
+                        = hoga.item.amazon_id.slice(/.img................................................................................................................................................................................./).sub(/img/, 'img class = "img-fluid" height="200" width="200"').html_safe
                       - else
                         img.img-fluid alt="bg-image" width="200" height="200" src=asset_path("bg-image")
                       br
