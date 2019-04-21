@@ -3,16 +3,22 @@ h2 ユーザー登録
   = devise_error_messages!
 
   .field
+    = f.label :アイコン画像
+    br/
     = f.file_field :image
+  br/
 
   .field
     = f.label :email
     br/
     = f.email_field :email, autofocus: true, autocomplete: "email"
+  br/
   .field
-    = f.label :name
+    = f.label :ユーザー名
     br/
     = f.text_field :name
+  br/
+  br/
 
   .field
     = f.label :password
