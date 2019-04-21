@@ -16,5 +16,9 @@ class User < ApplicationRecord
   has_many :reverse_of_follow_relationships, class_name: 'FollowRelationship', foreign_key: 'follow_id'
   has_many :followers, through: :reverse_of_follow_relationships, source: :user
 
+  def remember_me
+    true
+  end
+
 
 end
