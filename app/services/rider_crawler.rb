@@ -60,4 +60,11 @@ class RiderCrawler
     end
   end
 
+  def self.brand_crawl
+    
+    Item.where(category_id:1).each do |hoge|
+      p hoge.id
+    end
+  end
+
 end
