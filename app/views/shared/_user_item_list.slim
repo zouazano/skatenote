@@ -8,19 +8,20 @@
       - else
         img.img-fluid alt="bg-image" width="200" height="200" src=asset_path("bg-image")
       br
-      small.text-body #{user_item.item.category&.name}
-      br
-      small.brand-name.text-body #{user_item.item.brand&.name}
-      br
-        - if UserItem.where(item_id:user_item.item.id).present?
-          span.text-warning ★#{UserItem.where(item_id:user_item.item.id).average(:value)&.round(1)}
-        - else
-          span.text-warning ★-
-      button.btn-tag.btn-sm.py-0.px-1.d-inline type="button"
-        span 試した！
-      small.text-primary  #{user_item.item.user_items.count}
-      br
-      button.btn-tag.btn-sm.py-0.px-1.d-inline type="button"
-        span 欲しい！
-      small.text-primary  #{user_item.item.want_items.count}
+      .p-2
+        small.text-body #{user_item.item.category&.name}
+        br
+        small.brand-name.text-body #{user_item.item.brand&.name}
+        br
+          - if UserItem.where(item_id:user_item.item.id).present?
+            span.text-warning ★#{UserItem.where(item_id:user_item.item.id).average(:value)&.round(1)}
+          - else
+            span.text-warning ★-
+        button.btn-tag.btn-sm.py-0.px-1.d-inline type="button"
+          span 試した！
+        small.text-primary  #{user_item.item.user_items.count}
+        br
+        button.btn-tag.btn-sm.py-0.px-1.d-inline type="button"
+          span 欲しい！
+        small.text-primary  #{user_item.item.want_items.count}
 
