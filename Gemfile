@@ -28,6 +28,8 @@ gem 'rails-i18n'
 
 
 gem 'dragonfly', '~> 1.2.0'
+gem 'dragonfly-s3_data_store'
+gem 'mime-types'
 
 gem 'fog'
 gem 'dotenv-rails'
