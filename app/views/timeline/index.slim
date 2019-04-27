@@ -37,21 +37,22 @@
                       - else
                         img.img-fluid alt="bg-image" width="200" height="200" src=asset_path("bg-image")
                       br
-                      small.text-body #{hoga.item.category&.name}
-                      br
-                      small.brand-name.text-body #{hoga.item.brand&.name}
-                      br
-                        - if UserItem.where(item_id:hoga.item.id).present?
-                          span.text-warning ★#{UserItem.where(item_id:hoga.item.id).average(:value)&.round(1)}
-                        - else
-                          span.text-warning ★-
-                      button.btn-tag.btn-sm.py-0.px-1.d-inline type="button"
-                        span 試した！
-                      small.text-primary  #{hoga.item.user_items.count}
-                      br
-                      button.btn-tag.btn-sm.py-0.px-1.d-inline type="button"
-                        span 欲しい！
-                      small.text-primary  #{hoga.item.want_items.count}
+                      .p-2.folder
+                        small.text-body #{hoga.item.category&.name}
+                        br
+                        small.brand-name.text-body #{hoga.item.brand&.name}
+                        br
+                          - if UserItem.where(item_id:hoga.item.id).present?
+                            span.text-warning ★#{UserItem.where(item_id:hoga.item.id).average(:value)&.round(1)}
+                          - else
+                            span.text-warning ★-
+                        button.btn-tag.btn-sm.py-0.px-1.d-inline type="button"
+                          span 試した！
+                        small.text-primary  #{hoga.item.user_items.count}
+                        br
+                        button.btn-tag.btn-sm.py-0.px-1.d-inline type="button"
+                          span 欲しい！
+                        small.text-primary  #{hoga.item.want_items.count}
         - else 
           .border.bg-white.my-2.p-1.shadow-sm.bg-white.rounded
             .row
