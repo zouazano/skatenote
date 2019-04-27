@@ -20,8 +20,8 @@ Dragonfly.app.configure do
   else
     datastore :s3,
       bucket_name: 'rails-photo-carrierwave',
-      access_key_id: ENV_VAR["AWS_ACCESS_KEY_ID"],
-      secret_access_key: ENV_VAR["AWS_SECRET_ACCESS_KEY"],
+      access_key_id: ENV["AWS_ACCESS_KEY_ID"],
+      secret_access_key: ENV["AWS_SECRET_ACCESS_KEY"],
       region: 'ap-northeast-1'
   end
 
