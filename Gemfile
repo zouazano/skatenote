@@ -29,6 +29,9 @@ gem 'rails-i18n'
 
 gem 'dragonfly', '~> 1.2.0'
 
+gem 'fog'
+gem 'dotenv-rails'
+
 gem 'slim-rails'
 
 gem 'bootstrap', '~> 4.1.3'
