@@ -1,6 +1,6 @@
 .col-4.col-sm-3.col-md-2.p-1
   .card.shadow-sm.bg-white.rounded.my-1
-    a.folder href= item_path(item.id)
+    a href= item_path(item.id)
       - if item.amazon_id.present?
         = item.amazon_id.slice(/.img................................................................................................................................................................................./).sub(/img/, 'img class = "img-fluid" height="200" width="200"').html_safe
       - elsif item.user_items.where.not(image_uid:nil).first.present?
@@ -17,11 +17,12 @@
             span.text-warning ★#{UserItem.where(item_id:item.id).average(:value)&.round(1)}
           - else
             span.text-warning ★-
-        button.btn-tag.btn-sm.py-0.px-1.d-inline type="button"
-          span 試した！
-        small.text-primary  #{item.user_items.count}
-        br
-        button.btn-tag.btn-sm.py-0.px-1.d-inline type="button"
-          span 欲しい！
-        small.text-primary  #{item.want_items.count}
+        img alt="comment" width="15" height="15" src=asset_path("comment.svg")
+        small.text-secondary  #{item.user_items.count}
+        - if user_signed_in? and current_user.want_items.where(item_id: item.id).present?
+          img.ml-2 alt="heart" width="15" height="15" src=asset_path("heart_filled.png")
+          small.text-heart  #{item.want_items.count}
+        - else
+          img.ml-2 alt="heart" width="15" height="15" src=asset_path("heart_empty.png")
+          small.text-secondary  #{item.want_items.count}
 

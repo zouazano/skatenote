@@ -14,37 +14,30 @@
         = image_tag @item.user_items.where.not(image_uid:nil).first.image.thumb('110x110#').url
       - else
         img alt="bg-image" width="115" height="110" src=asset_path("bg-image")
-      .row
-        .col-6
-          span.text-warning ★#{UserItem.where(item_id:@item.id).average(:value)&.round(1)}
-          br
-          button.btn-tag.btn-sm.py-0.px-1.d-inline type="button"
-            span 試した！
-          small.text-primary  #{@item.user_items.count}
-          br
-          button.btn-tag.btn-sm.py-0.px-1.d-inline type="button"
-            span 欲しい！
-          small.text-primary  #{@item.want_items.count}
-        .col-6
-          - if user_signed_in?
-            - if current_user.user_items.where(item_id: @item.id).present?
-              = link_to item_user_items_destroy_path(@item)
-                button.btn.btn-primary.m-1.float-right type="button" 試した！
-            - else
-              = link_to new_item_user_item_path(@item)
-                button.btn.btn-none.m-1.float-right type="button" 試した！
-
-            - if current_user.want_items.where(item_id: @item.id).present?
-              = link_to item_want_items_destroy_path(@item)
-                button.btn.btn-primary.m-1.float-right type="button" 欲しい！
-            - else
-              = link_to item_want_items_create_path(@item)
-                button.btn.btn-none.m-1.float-right type="button" 欲しい！
-          - else 
-            p ログインするとこのアイテムを「試した！」や、「欲しい！」に登録することができます。
-            = link_to 'ユーザー登録', new_user_registration_path
-            br
-            = link_to 'ログイン', new_user_session_path
+      br
+      span.text-warning ★#{UserItem.where(item_id:@item.id).average(:value)&.round(1)}
+      br
+      - if user_signed_in?
+        = link_to new_item_user_item_path(@item)
+          img alt="comment" width="20" height="20" src=asset_path("comment.svg")
+          small.text-secondary  #{@item.user_items.count}
+        - if current_user.want_items.where(item_id: @item.id).present?
+          = link_to item_want_items_destroy_path(@item)
+            img.ml-4 alt="heart" width="20" height="20" src=asset_path("heart_filled.png")
+            small.text-heart  #{@item.want_items.count}
+        - else
+          = link_to item_want_items_create_path(@item)
+            img.ml-4 alt="heart" width="20" height="20" src=asset_path("heart_empty.png")
+            small.text-secondary  #{@item.want_items.count}
+      - else
+        img alt="comment" width="20" height="20" src=asset_path("comment.svg")
+        small.text-secondary  #{@item.user_items.count}
+        img.ml-4 alt="heart" width="20" height="20" src=asset_path("heart_empty.png")
+        small.text-heart  #{@item.want_items.count}
+        p ログインするとこのアイテムを「試した！」や、「欲しい！」に登録することができます。
+        = link_to 'ユーザー登録', new_user_registration_path
+        br
+        = link_to 'ログイン', new_user_session_path
   .row
     .col-12.bg-white
       h2 スコア・レビュー

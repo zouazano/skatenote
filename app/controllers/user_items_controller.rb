@@ -10,7 +10,7 @@ class UserItemsController < ApplicationController
     @user=current_user
     @item=Item.find(params[:item_id])
     @user_item = @user.user_items.build(user_item_params)
-    if UserItem.where(user_id: @user.id, item_id:@item.id).first_or_create(user_item_params)
+    if UserItem.where(user_id: @user.id, item_id:@item.id).create(user_item_params)
       redirect_to item_path(@item)
       flash = '"試した！"に追加しました！'
     else

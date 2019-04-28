@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_04_21_092004) do
+ActiveRecord::Schema.define(version: 2019_04_28_014318) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -76,7 +76,7 @@ ActiveRecord::Schema.define(version: 2019_04_21_092004) do
     t.string "name"
     t.string "shop"
     t.index ["item_id"], name: "index_user_items_on_item_id"
-    t.index ["user_id", "item_id"], name: "index_user_items_on_user_id_and_item_id", unique: true
+    t.index ["user_id", "item_id"], name: "index_user_items_on_user_id_and_item_id"
     t.index ["user_id"], name: "index_user_items_on_user_id"
   end
 
