@@ -21,7 +21,7 @@
           .text-center
             span 気になるアイテムは
             span 
-             button.btn.btn-primary.m-1 type="button" 欲しい！
+             img.mt-1 alt="heart" width="25" height="25" src=asset_path("bookmark_mute.png")
             span を押してチェックしましょう。
         .col-12.px-3
           .text-center
@@ -29,10 +29,12 @@
         .col-12.p-5.mb-5
           a href=search_index_path
             .text-center
-              span まずはアイテムを↓の
+              span まずはアイテムを
               span
                 img alt="search" height="30" src=asset_path("search_1.png")     
-              span から探そう！ 
+              span から探そう！
+              br
+              span ↓
     - else
       .col-12
         p ログインすると自分のアイテムを表示できます
