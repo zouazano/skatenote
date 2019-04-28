@@ -26,6 +26,6 @@ Rails.application.routes.draw do
   end
 
 
-  root to: "tried#index"
+  root to: "timeline#index"
   get 'top/index'
 end
