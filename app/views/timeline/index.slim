@@ -12,10 +12,7 @@
                 .float-right.mr-4
                   small.text-secondary #{Date.today.day - hoga.created_at.day}日
             .row
-                .col-7
-                  a href = item_path(hoga.item.id)
-                  span 「試した！」に追加！
-                  br
+                .col-8
                   span.text-warning ★#{hoga.value}
                   br
                   small.text-secondary ・#{hoga.name}
@@ -25,7 +22,7 @@
                   small.text-secondary ・#{hoga.shop}
                   br
                   = simple_format(hoga.comment)
-                .col-5
+                .col-4
                   .card.shadow-sm.bg-white.rounded.my-1
                     a.folder href= item_path(hoga.item.id)
                       - if hoga.image_uid.present?
@@ -44,13 +41,13 @@
                             span.text-warning ★#{UserItem.where(item_id:hoga.item.id).average(:value)&.round(1)}
                           - else
                             span.text-warning ★-
-                        img alt="comment" width="15" height="15" src=asset_path("comment.svg")
+                        img alt="comment" width="15" height="15" src=asset_path("comment.png")
                         small.text-secondary  #{hoga.item.user_items.count}
                         - if user_signed_in? and current_user.want_items.where(item_id: hoga.item.id).present?
-                          img.ml-2 alt="heart" width="15" height="15" src=asset_path("heart_filled.png")
+                          img.ml-2 alt="heart" width="15" height="15" src=asset_path("bookmark_color.png")
                           small.text-heart  #{hoga.item.want_items.count}
                         - else
-                          img.ml-2 alt="heart" width="15" height="15" src=asset_path("heart_empty.png")
+                          img.ml-2 alt="heart" width="15" height="15" src=asset_path("bookmark_mute.png")
                           small.text-secondary  #{hoga.item.want_items.count}
         - else 
           .border.bg-white.my-2.p-1.shadow-sm.bg-white.rounded

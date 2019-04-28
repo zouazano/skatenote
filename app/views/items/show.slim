@@ -1,13 +1,14 @@
 .container
   .row
-    .col-12.bg-white
+    .col-12.bg-white.border-bottom
       a href=search_index_path 
         span.text-primary ◀アイテム一覧
-  .row
-    .col-12.mb-3.bg-white
+  .row.bg-white.mb-2
+    .col-12.bg-white
       h1
         | #{@item.category&.name}/
         | #{@item.brand&.name}
+    .col-6.mb-3
       - if @item.amazon_id.present?
         = @item.amazon_id.slice(/.img................................................................................................................................................................................./).sub(/img/, 'img class = "img-fluid" height="110" width="110"').html_safe
       - elsif @item.user_items.where.not(image_uid:nil).first.present?
@@ -17,30 +18,48 @@
       br
       span.text-warning ★#{UserItem.where(item_id:@item.id).average(:value)&.round(1)}
       br
-      - if user_signed_in?
-        = link_to new_item_user_item_path(@item)
-          img alt="comment" width="20" height="20" src=asset_path("comment.svg")
-          small.text-secondary  #{@item.user_items.count}
-        - if current_user.want_items.where(item_id: @item.id).present?
-          = link_to item_want_items_destroy_path(@item)
-            img.ml-4 alt="heart" width="20" height="20" src=asset_path("heart_filled.png")
-            small.text-heart  #{@item.want_items.count}
+      button.btn.btn-warning.shadow-sm.rounded type="button"
+        span amazonで詳細を見る
+    .col-6.mb-3.d-flex.align-items-end
+      .row
+        - if user_signed_in?
+          .col-6
+            = link_to new_item_user_item_path(@item)
+              img alt="comment" width="40" height="40" src=asset_path("comment.png")
+              span.text-secondary  #{@item.user_items.count}
+              br
+              span 試した！
+              br
+              span に登録
+          .col-6
+            - if current_user.want_items.where(item_id: @item.id).present?
+              = link_to item_want_items_destroy_path(@item)
+                img alt="heart" width="35" height="35" src=asset_path("bookmark_color.png")
+                span.text-heart  #{@item.want_items.count}
+                br
+                span 欲しい！
+                br
+                span に登録
+            - else
+              = link_to item_want_items_create_path(@item)
+                img.mt-1 alt="heart" width="35" height="35" src=asset_path("bookmark_mute.png")
+                span.text-secondary  #{@item.want_items.count}
+                br
+                span 欲しい！
+                br
+                span に登録
         - else
-          = link_to item_want_items_create_path(@item)
-            img.ml-4 alt="heart" width="20" height="20" src=asset_path("heart_empty.png")
-            small.text-secondary  #{@item.want_items.count}
-      - else
-        img alt="comment" width="20" height="20" src=asset_path("comment.svg")
-        small.text-secondary  #{@item.user_items.count}
-        img.ml-4 alt="heart" width="20" height="20" src=asset_path("heart_empty.png")
-        small.text-heart  #{@item.want_items.count}
-        p ログインするとこのアイテムを「試した！」や、「欲しい！」に登録することができます。
-        = link_to 'ユーザー登録', new_user_registration_path
-        br
-        = link_to 'ログイン', new_user_session_path
+          img alt="comment" width="40" height="40" src=asset_path("comment.png")
+          small.text-secondary  #{@item.user_items.count}
+          img.ml-4 alt="heart" width="35" height="35" src=asset_path("bookmark_mute.png")
+          small.text-heart  #{@item.want_items.count}
+          p ログインするとこのアイテムを「試した！」や、「欲しい！」に登録することができます。
+          = link_to 'ユーザー登録', new_user_registration_path
+          br
+          = link_to 'ログイン', new_user_session_path
   .row
     .col-12.bg-white
-      h2 スコア・レビュー
+      span スコア・レビュー
       - UserItem.where(item_id:@item.id).order("created_at DESC").each do |user_item|
         .border-bottom.py-3
           a href = user_path(user_item.user.id)
@@ -59,7 +78,7 @@
           br
           = simple_format(user_item.comment)
           br
-          = image_tag user_item.image.thumb('200x200#').url if user_item.image_stored?
+          = image_tag user_item.image.thumb('400x400#').url if user_item.image_stored?
           br/
   br
   br
