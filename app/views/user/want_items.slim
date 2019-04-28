@@ -4,10 +4,16 @@
     .col-12.p-0
       ul.nav.nav-tabs.nav-fill
         li.nav-item
-          a.nav-link href=user_path(@user) 試した！#{@user.user_items.count}件
+          a.nav-link href=user_path(@user)
+            img alt="comment" width="20" height="20" src=asset_path("comment.png")
+            span.text-secondary 試した！
+            span.text-secondary #{@user.user_items.count}件
         li.nav-item
-          a.nav-link.active href=user_want_items_path(@user) 欲しい！#{@user.want_items.count}件
-
+          a.nav-link.active href=user_want_items_path(@user) 
+            img alt="heart" width="17" height="17" src=asset_path("bookmark_mute.png")
+            span.text-secondary 欲しい！
+            span.text-secondary #{@user.want_items.count}件
+  .row.bg-white
     - @user.want_items.all.each do |hoge|
       = render 'shared/item_list', item:hoge.item
       
