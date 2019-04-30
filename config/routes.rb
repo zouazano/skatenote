@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   get 'search/index'
 
   get 'timeline/index'
+  get 'timeline/friends'
   get 'shared/back'
 
   resources :user do

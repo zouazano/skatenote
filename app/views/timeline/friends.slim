@@ -1,0 +1,86 @@
+.container
+  .row
+    .col-12.mb-5
+      ul.nav.fixed-top.bg-white.p-1.shadow-sm.bg-white.rounded
+        li.nav-item
+          a.nav-link.disabled aria-disabled="true" href=timeline_index_path tabindex="-1" トレンド
+        li.nav-item
+          a.nav-link.active href=timeline_friends_path 知り合い
+    - if user_signed_in?
+      .col-12.mb-5
+        - @hogas.sort_by {|hoga| hoga.created_at }.reverse.each do |hoga|
+          - if hoga.methods.include?(:value)
+            .border.bg-white.my-2.p-1.shadow-sm.bg-white.rounded
+              .row
+                .col-12
+                  a href = user_path(hoga.user.id)
+                    - if hoga.user.image_stored?
+                      = image_tag hoga.user.image.thumb('50x50#').url
+                    - else
+                      img.img-fluid alt="bg-image" width="50" height="50" src=asset_path("profile_icon.png")
+                    span.text-body.font-weight-bold #{hoga.user.name}
+                  .float-right.mr-4
+                    small.text-secondary #{Date.today.day - hoga.created_at.day}日
+              .row
+                  .col-7.pr-0
+                    span.text-warning ★#{hoga.value}
+                    br
+                    small.text-secondary ・#{hoga.name}
+                    br
+                    small.text-secondary ・#{hoga.size}
+                    br
+                    small.text-secondary ・#{hoga.shop}
+                    br
+                    = simple_format(hoga.comment)
+                  .col-5
+                    .card.shadow-sm.bg-white.rounded.my-1
+                      a.folder href= item_path(hoga.item.id)
+                        - if hoga.image_uid.present?
+                          = image_tag hoga.image.thumb('200x200#').url, class:'img-fluid'
+                        - elsif hoga.item.amazon_id.present?
+                          = hoga.item.amazon_id.slice(/.img................................................................................................................................................................................./).sub(/img/, 'img class = "img-fluid" height="200" width="200"').html_safe
+                        - else
+                          img.img-fluid alt="bg-image" width="200" height="200" src=asset_path("bg-image")
+                        br
+                        .p-2.folder
+                          small.text-body #{hoga.item.category&.name}
+                          br
+                          small.brand-name.text-body #{hoga.item.brand&.name}
+                          br
+                            - if UserItem.where(item_id:hoga.item.id).present?
+                              span.text-warning ★#{UserItem.where(item_id:hoga.item.id).average(:value)&.round(1)}
+                            - else
+                              span.text-warning ★-
+                          img alt="comment" width="15" height="15" src=asset_path("comment.png")
+                          small.text-secondary  #{hoga.item.user_items.count}
+                          - if user_signed_in? and current_user.want_items.where(item_id: hoga.item.id).present?
+                            img.ml-2 alt="heart" width="12" height="12" src=asset_path("bookmark_color.png")
+                            small.text-heart  #{hoga.item.want_items.count}
+                          - else
+                            img.ml-2 alt="heart" width="12" height="12" src=asset_path("bookmark_mute.png")
+                            small.text-secondary  #{hoga.item.want_items.count}
+          - else 
+            .border.bg-white.my-2.p-1.shadow-sm.bg-white.rounded
+              .row
+                .col-12
+                  a href = user_path(hoga.user.id)
+                    - if hoga.user.image_stored?
+                      = image_tag hoga.user.image.thumb('50x50#').url
+                    - else
+                      img.img-fluid alt="bg-image" width="50" height="50" src=asset_path("profile_icon.png")
+                    span.text-body.font-weight-bold #{hoga.user.name}
+                  .float-right.mr-4
+                    small.text-secondary #{Date.today.day - hoga.created_at.day}日
+              .row
+                .col-10
+                  a href = item_path(hoga.item.id)
+                    span #{hoga.item&.category&.name}/#{hoga.item&.brand&.name}
+                  span を「欲しい！」に追加!
+    - else
+      .col-12.mb-5
+        .border.bg-white.my-2.p-1.shadow-sm.bg-white.rounded
+          span ログインすると友達や知り合い、気になるスケーターなどフォローした人の動向をチェックできます！
+
+        
+    = render 'shared/timeline_footer'
+

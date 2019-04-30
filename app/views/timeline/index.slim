@@ -1,6 +1,12 @@
 .container
   .row
     .col-12.mb-5
+      ul.nav.fixed-top.bg-white.p-1.shadow-sm.bg-white.rounded
+        li.nav-item
+          a.nav-link.active href=timeline_index_path トレンド
+        li.nav-item
+          a.nav-link.disabled aria-disabled="true" href=timeline_friends_path tabindex="-1" 知り合い
+    .col-12.mb-5
       - @hogas.sort_by {|hoga| hoga.created_at }.reverse.each do |hoga|
         - if hoga.methods.include?(:value)
           .border.bg-white.my-2.p-1.shadow-sm.bg-white.rounded
