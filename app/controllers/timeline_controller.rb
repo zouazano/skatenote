@@ -26,14 +26,6 @@ class TimelineController < ApplicationController
           @hogas << hoga
         end
       end
-      current_user.followers&.each do |hoge|
-        hoge.want_items&.each do |hoga|
-          @hogas << hoga
-        end
-        hoge.user_items&.each do |hoga|
-          @hogas << hoga
-        end
-      end
     end
   end
 
