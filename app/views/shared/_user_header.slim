@@ -12,11 +12,13 @@
     .col-9
       .row.mb-3
         .col-6
-          span.font-weight-bold #{@user.followers.count}
-          span フォロワー
+          a href = user_followers_path(@user)
+            span.font-weight-bold.text-body #{@user.followers.count}
+            span.text-body フォロワー
         .col-6
-          span.font-weight-bold #{@user.following.count}
-          span フォロー
+          a href = user_followings_path(@user)
+            span.text-body.font-weight-bold #{@user.following.count}
+            span.text-body フォロー
       .row
         .col-12
           - if user_signed_in?
@@ -31,5 +33,7 @@
                   button.py-0.btn-block.btn.btn-outline-secondary type="button" 
                     img.mb-1.mr-2.img-fluid alt="bg-image" width="20" height="20" src=asset_path("follow.png")
                     span フォロー
+              - if @user.following.include?(current_user)
+                small.float-right.text-secondary フォローされています
           - else
-            span ログインするとこのユーザーをフォローすることができます。
+            small ログインするとこのユーザーをフォローすることができます。

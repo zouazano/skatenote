@@ -6,8 +6,11 @@ Rails.application.routes.draw do
   get 'search/index'
 
   get 'timeline/index'
+  get 'shared/back'
 
   resources :user do
+    get "followings"
+    get "followers"
     get "want_items"
     get "relationships/create"
     get "relationships/destroy"
