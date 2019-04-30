@@ -7,7 +7,10 @@
             .row
               .col-12
                 a href = user_path(hoga.user.id)
-                  = image_tag hoga.user.image.thumb('50x50#').url if hoga.user.image_stored?
+                  - if hoga.user.image_stored?
+                    = image_tag hoga.user.image.thumb('50x50#').url
+                  - else
+                    img.img-fluid alt="bg-image" width="50" height="50" src=asset_path("profile_icon.png")
                   span.text-body.font-weight-bold #{hoga.user.name}
                 .float-right.mr-4
                   small.text-secondary #{Date.today.day - hoga.created_at.day}日
@@ -54,7 +57,10 @@
             .row
               .col-12
                 a href = user_path(hoga.user.id)
-                  = image_tag hoga.user.image.thumb('50x50#').url if hoga.user.image_stored?
+                  - if hoga.user.image_stored?
+                    = image_tag hoga.user.image.thumb('50x50#').url
+                  - else
+                    img.img-fluid alt="bg-image" width="50" height="50" src=asset_path("profile_icon.png")
                   span.text-body.font-weight-bold #{hoga.user.name}
                 .float-right.mr-4
                   small.text-secondary #{Date.today.day - hoga.created_at.day}日

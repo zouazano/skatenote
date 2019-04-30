@@ -1,17 +1,50 @@
-.container
+.container.mt-1
   .row
-    .col-12
-      - if user_signed_in?
-        /strong= link_to @user.name, pages_show_path
-        = image_tag current_user.image.thumb('50x50#').url if current_user.image_stored?
-        span.text-body.font-weight-bold = current_user.name
+    - if user_signed_in?
+      .col-3
+        - if current_user.image_stored?
+          = image_tag current_user.image.thumb('70x70#').url
+        - else
+          img.img-fluid alt="bg-image" width="70" height="70" src=asset_path("profile_icon.png")
         br
+        span.text-body.font-weight-bold = current_user.name 
+        br
+      .col-9
+        .row.mb-3
+          .col-6
+            span.font-weight-bold #{current_user.followers.count}
+            span フォロワー
+          .col-6
+            span.font-weight-bold #{current_user.following.count}
+            span フォロー
+        .row
+          .col-12
+            button.py-0.btn.btn-outline-secondary type="button"
+              a href = edit_user_registration_path
+                span.text-secondary プロフ変更
+            button.ml-2.py-0.btn.btn-outline-secondary type="button"
+              = link_to destroy_user_session_path, method: :delete
+                span.text-secondary ログアウト
 
-        = link_to 'プロフィール変更', edit_user_registration_path
+    - else
+      .col-3
+        img.img-fluid alt="bg-image" width="70" height="70" src=asset_path("profile_icon.png")
         br
-        = link_to 'ログアウト', destroy_user_session_path, method: :delete
-      - else
-        p ゲストさん
-        = link_to 'ユーザー登録', new_user_registration_path
+        span.text-body.font-weight-bold ゲストさん
         br
-        = link_to 'ログイン', new_user_session_path
+      .col-9
+        .row.mb-3
+          .col-6
+            span.font-weight-bold -
+            span フォロワー
+          .col-6
+            span.font-weight-bold -
+            span フォロー
+        .row
+          .col-12
+            button.py-0.btn.btn-outline-secondary type="button"
+              a href = new_user_registration_path
+                span.text-secondary ユーザー登録
+            button.ml-2.py-0.btn.btn-outline-secondary type="button"
+              = link_to new_user_session_path
+                span.text-secondary ログイン

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_04_28_014318) do
+ActiveRecord::Schema.define(version: 2019_04_29_221737) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -27,16 +27,6 @@ ActiveRecord::Schema.define(version: 2019_04_28_014318) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "follow_relationships", force: :cascade do |t|
-    t.bigint "user_id"
-    t.bigint "follow_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["follow_id"], name: "index_follow_relationships_on_follow_id"
-    t.index ["user_id", "follow_id"], name: "index_follow_relationships_on_user_id_and_follow_id", unique: true
-    t.index ["user_id"], name: "index_follow_relationships_on_user_id"
-  end
-
   create_table "items", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
@@ -47,6 +37,16 @@ ActiveRecord::Schema.define(version: 2019_04_28_014318) do
     t.integer "rider_id"
     t.integer "category_id"
     t.boolean "authorized", default: false, null: false
+  end
+
+  create_table "relationships", force: :cascade do |t|
+    t.integer "follower_id"
+    t.integer "followed_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["followed_id"], name: "index_relationships_on_followed_id"
+    t.index ["follower_id", "followed_id"], name: "index_relationships_on_follower_id_and_followed_id", unique: true
+    t.index ["follower_id"], name: "index_relationships_on_follower_id"
   end
 
   create_table "rider_brands", force: :cascade do |t|
@@ -104,8 +104,6 @@ ActiveRecord::Schema.define(version: 2019_04_28_014318) do
     t.index ["user_id"], name: "index_want_items_on_user_id"
   end
 
-  add_foreign_key "follow_relationships", "users"
-  add_foreign_key "follow_relationships", "users", column: "follow_id"
   add_foreign_key "rider_brands", "brands"
   add_foreign_key "rider_brands", "riders"
   add_foreign_key "user_items", "items"

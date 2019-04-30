@@ -9,6 +9,8 @@ Rails.application.routes.draw do
 
   resources :user do
     get "want_items"
+    get "relationships/create"
+    get "relationships/destroy"
   end
 
   resources :follow_relationships, only: [:create, :destroy]
