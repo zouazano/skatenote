@@ -20,7 +20,7 @@
                       img.img-fluid alt="bg-image" width="50" height="50" src=asset_path("profile_icon.png")
                     span.text-body.font-weight-bold #{hoga.user.name}
                   .float-right.mr-4
-                    small.text-secondary #{Date.today.day - hoga.created_at.day}日
+                    small.text-secondary #{time_ago_in_words(hoga.created_at)}
               .row
                   .col-7.pr-0
                     span.text-warning ★#{hoga.value}
@@ -70,7 +70,7 @@
                       img.img-fluid alt="bg-image" width="50" height="50" src=asset_path("profile_icon.png")
                     span.text-body.font-weight-bold #{hoga.user.name}
                   .float-right.mr-4
-                    small.text-secondary #{Date.today.day - hoga.created_at.day}日
+                    small.text-secondary #{time_ago_in_words(hoga.created_at)}
               .row
                 .col-10
                   a href = item_path(hoga.item.id)
