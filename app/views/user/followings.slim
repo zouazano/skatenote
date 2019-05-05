@@ -3,7 +3,7 @@
     .col-12.border-bottom.shadow-sm.bg-white.rounded.mb-1
       a href = user_path(@user)
         span.text-body ◀
-      span.font-weight-bold.d-inline.ml-2 フォロワー
+      span.font-weight-bold.d-inline.ml-2 フォロー中
     .col-12
-      - @user.following.each do |hoge|
-        = render 'shared/follow_list', user:hoge
+    - @user.following.each do |hoge|
+      = render 'shared/follow_list', user:hoge
