@@ -21,7 +21,7 @@
         small.text-secondary  #{item.user_items.count}
         - if user_signed_in? and current_user.want_items.where(item_id: item.id).present?
           img.ml-2 alt="heart" width="12" height="12" src=asset_path("bookmark_color.png")
-          small.text-heart  #{item.want_items.count}
+          small.text-active  #{item.want_items.count}
         - else
           img.ml-2 alt="heart" width="12" height="12" src=asset_path("bookmark_mute.png")
           small.text-secondary  #{item.want_items.count}
