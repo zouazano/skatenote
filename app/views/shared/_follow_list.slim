@@ -1,11 +1,11 @@
-.col-12.border.bg-white.my-2.shadow-sm.bg-white.rounded
+.col-12.border-bottom
   a href = user_path(user.id)
     .row.mb-2
       .col-3
         - if user.image_stored?
-          = image_tag user.image.thumb('50x50#').url
+          = image_tag user.image.thumb('50x50#').url, class:'rounded-circle'
         - else
-          img.img-fluid alt="bg-image" width="50" height="50" src=asset_path("profile_icon.png")
+          img.img-fluid.rounded-circle alt="bg-image" width="50" height="50" src=asset_path("profile_icon.png")
        
       .col-9
         span.text-body.font-weight-bold #{user.name}
