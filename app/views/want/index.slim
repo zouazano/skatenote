@@ -11,7 +11,7 @@
               span.text-secondary #{current_user.user_items.count}件
         li.nav-item
           a.nav-link.active href=want_index_path 
-            img alt="heart" width="17" height="17" src=asset_path("bookmark_mute.png")
+            img alt="heart" width="17" height="17" src=asset_path("bookmark_color.png")
             span.text-secondary 欲しい！
             - if user_signed_in?
               span.text-secondary #{current_user.want_items.count}件

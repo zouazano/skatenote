@@ -9,6 +9,11 @@
         img alt="search" width="20" height="20" src=asset_path("search-active.png")
         small.d-block.m-0.text-info Search
     li.nav-item
-      a.p-0.nav-link href=tried_index_path
-        img alt="mypage" width="20" height="20" src=asset_path("mypage.png")
-        small.d-block.m-0.text-muted MyPage
+      - if user_signed_in?
+        a.p-0.nav-link href=tried_index_path
+          img alt="mypage" width="20" height="20" src=asset_path("mypage.png")
+          small.d-block.m-0.text-muted MyPage
+      - else
+        .div data-target="#exampleModal" data-toggle="modal"
+          img alt="mypage" width="20" height="20" src=asset_path("mypage.png")
+          small.d-block.m-0.text-muted MyPage
