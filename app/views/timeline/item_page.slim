@@ -1,0 +1,40 @@
+.col-12.bg-white.rounded.my-1
+  a.folder href= item_path(hoga.item.id)
+    - if hoga.image_uid.present?
+      = image_tag hoga.image.thumb('200x200#').url, class:'img-cup'
+    - elsif hoga.item.amazon_id.present?
+      = hoga.item.amazon_id&.sub(/ >/, ' height="200" class="img-cup" >').slice(/<img.* >/).html_safe
+    - else
+      img.img-cup alt="bg-image" height="200" src=asset_path("bg-image")
+    br
+    .p-2.folder
+      small.text-body #{hoga.item.category&.name}ふがふが
+      br
+      small.brand-name.text-body #{hoga.item.brand&.name}
+      br
+        - if UserItem.where(item_id:hoga.item.id).present?
+          span.text-warning ★#{UserItem.where(item_id:hoga.item.id).average(:value)&.round(1)}
+        - else
+          span.text-warning ★-
+      img alt="comment" width="15" height="15" src=asset_path("comment.png")
+      small.text-secondary  #{hoga.item.user_items.count}
+      - if user_signed_in? and current_user.want_items.where(item_id: hoga.item.id).present?
+        img.ml-2 alt="heart" width="15" height="15" src=asset_path("bookmark_color.png")
+        small.text-heart  #{hoga.item.want_items.count}
+      - else
+        img.ml-2 alt="heart" width="15" height="15" src=asset_path("bookmark_mute.png")
+        small.text-secondary  #{hoga.item.want_items.count}
+    .row.mt-2
+      .col-3
+        img.mx-auto.d-block alt="item" width="15" src=asset_path("star.png")
+        small.d-block.text-center.text-active.text-basic = UserItem.where(item_id:hoga.id).average(:value)&.round(1)
+      .col-3
+        img.mx-auto.d-block alt="item" width="15" src=asset_path("item.png")
+        span.d-block.text-center.mr-1.text-muted.text-basic = hoga.user_items.count
+      .col-3
+        - unless user_signed_in? and WantItem.where(user_id:current_user.id, item_id:hoga.id).present?
+          img.mx-auto.d-block alt="log-in" width="15" src=asset_path("clip.png")
+          span.d-block.text-center.text-muted.text-basic = hoga.want_items.count
+        - else
+          img.mx-auto.d-block alt="log-in" width="15" src=asset_path("clip-active.png")
+          span.d-block.text-center.text-active.text-basic = hoga.want_items.count

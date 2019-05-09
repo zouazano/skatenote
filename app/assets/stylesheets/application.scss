@@ -19,12 +19,23 @@ body {
     -webkit-text-size-adjust: 100%;
     background-color: #f8f9fa;
     color: #000000;
-    
-    
+}
+
+.modal-body {
+    max-height: calc(100vh - 10px);
+    overflow-y: auto;
 }
 
 .bg-grey{
   background-color: #f8f9fa;
+}
+
+.text-active{
+  color: #f3980a;
+}
+
+.text-basic{
+  font-size: 14px;
 }
 
 .btn-none{
@@ -48,6 +59,12 @@ body {
   color: #007bff;
   border-color: #007bff;
   background-color: white;
+}
+
+.img-cup{
+  object-fit: cover;
+  max-width: 100%;
+  
 }
 
 .text-heart{
