@@ -18,11 +18,11 @@
         .col-6
           a href = user_followers_path(@user)
             span.font-weight-bold.text-body #{@user.followers.count}
-            span.text-body フォロワー
+            span.text-body.text-basic フォロワー
         .col-6
           a href = user_followings_path(@user)
             span.text-body.font-weight-bold #{@user.following.count}
-            span.text-body フォロー
+            span.text-body.text-basic フォロー
       .row
         .col-12
           - if user_signed_in?
@@ -41,3 +41,5 @@
                 small.float-right.text-secondary フォローされています
           - else
             small ログインするとこのユーザーをフォローすることができます。
+    .col-12
+      p.text-basic = @user.profile

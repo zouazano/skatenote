@@ -18,16 +18,18 @@
           .col-6
             a href = user_followers_path(current_user)
               span.text-body.font-weight-bold #{current_user.followers.count}
-              span.text-body フォロワー
+              span.text-body.text-basic フォロワー
           .col-6
             a href = user_followings_path(current_user)
               span.text-body.font-weight-bold #{current_user.following.count}
-              span.text-body フォロー
+              span.text-body.text-basic フォロー
         .row
           .col-12
             button.py-0.btn.btn-outline-secondary type="button"
               a href = edit_user_registration_path
                 span.text-secondary プロフ変更
+      .col-12
+        p.text-basic = current_user.profile
 
     - else
       .col-3
