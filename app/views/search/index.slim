@@ -14,15 +14,13 @@
               p = Category.find(params[:q]["category_id_eq"]).name
             - unless params[:q]["brand_id_eq"] == ""
               p = Brand.find(params[:q]["brand_id_eq"]).name
+              = form_for @item do |f|
+                = f.hidden_field :category_id, value: params[:q]["category_id_eq"]
+                = f.hidden_field :brand_id, value: params[:q]["brand_id_eq"]
 
+                p この条件でアイテムを作成しますか？
 
-            = form_for @item do |f|
-              = f.hidden_field :category_id, value: params[:q]["category_id_eq"]
-              = f.hidden_field :brand_id, value: params[:q]["brand_id_eq"]
-
-              p この条件でアイテムを作成しますか？
-
-              = f.submit "作成する", class:"form-control mb-3"
+                = f.submit "作成する", class:"form-control mb-3"
 
     - @items.sort_by {|item| item.updated_at }.reverse.each do |item|
       = render 'shared/item_list', item:item
