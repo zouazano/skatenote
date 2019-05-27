@@ -30,8 +30,17 @@ body {
   background-color: #f8f9fa;
 }
 
+.border-active{
+  border-bottom-width: 3px;
+  border-bottom: solid #17a2b8;
+}
+
 .text-active{
   color: #f3980a;
+}
+
+.text-theme{
+  color: #17a2b8;
 }
 
 .text-basic{

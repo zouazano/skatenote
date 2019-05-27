@@ -1,14 +1,14 @@
 .container.mb-1
   .row
-    .col-12
-      a href = timeline_index_path
-        span.font-weight-bold.text-body トレンド
+    .col-12.bg-white.border-bottom.pb-1
+      a.border-active.pb-1 href = timeline_index_path
+        span.font-weight-bold.text-theme トレンド
       - if user_signed_in?
-        a href = timeline_friends_path
-          span.text-muted.ml-3 フレンド
+        a.ml-3 href = timeline_friends_path
+          span.text-muted フレンド
       - else
-        .div.d-inline data-target="#exampleModal" data-toggle="modal"
-          span.text-muted.ml-3 フレンド
+        .div.d-inline.ml-3 data-target="#exampleModal" data-toggle="modal"
+          span.text-muted フレンド
     .col-12.mb-5.bg-white.shadow-sm.bg-white.rounded
       - @hogas.sort_by {|hoga| hoga.created_at }.reverse.each do |hoga|
         - if hoga.methods.include?(:value)
@@ -39,7 +39,7 @@
                 small.text-basic.text-muted ・#{hoga.size}
                 br
                 small.text-basic.text-muted ・#{hoga.shop}
-                .border.rounded
+                .border.bg-white.shadow-sm.rounded
                   = render 'shared/item_page', hoga:hoga
 
         - else
@@ -60,7 +60,7 @@
                 img alt="bookmark" width="15" src=asset_path("bookmark_color.png")
                 span.ml-1 欲しい！
                 br
-                .border.rounded
+                .border.bg-white.shadow-sm.rounded
                   = render 'shared/want_item_page', hoga:hoga
 
       

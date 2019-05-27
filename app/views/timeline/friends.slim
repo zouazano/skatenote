@@ -1,14 +1,14 @@
 .container.mb-1
   .row
-    .col-12
+    .col-12.bg-white.border-bottom.pb-1
       a href = timeline_index_path
         span.font-weight-bold.text-muted トレンド
       - if user_signed_in?
-        a href = timeline_friends_path
-          span.font-weight-bold.text-body.ml-3 フレンド
+        a.border-active.pb-1.ml-3 href = timeline_friends_path
+          span.font-weight-bold.text-theme フレンド
       - else
         .div.d-inline data-target="#exampleModal" data-toggle="modal"
-          span.text-muted.ml-3 フレンド
+          span.text-muted フレンド
     .col-12.mb-5.bg-white.shadow-sm.bg-white.rounded
       - @hogas.sort_by {|hoga| hoga.created_at }.reverse.each do |hoga|
         - if hoga.methods.include?(:value)
