@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_05_15_035120) do
+ActiveRecord::Schema.define(version: 2019_05_27_182349) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -75,6 +75,7 @@ ActiveRecord::Schema.define(version: 2019_05_15_035120) do
     t.float "size"
     t.string "name"
     t.string "shop"
+    t.integer "evaluation"
     t.index ["item_id"], name: "index_user_items_on_item_id"
     t.index ["user_id", "item_id"], name: "index_user_items_on_user_id_and_item_id"
     t.index ["user_id"], name: "index_user_items_on_user_id"

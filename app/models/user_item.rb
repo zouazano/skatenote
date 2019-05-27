@@ -3,4 +3,6 @@ class UserItem < ApplicationRecord
   
   belongs_to :user
   belongs_to :item
+
+  enum evaluation: { good: 0}
 end
