@@ -37,7 +37,9 @@
           small.text-basic.text-muted #{time_ago_in_words(user_item.created_at)}
           br
           span.font-weight-bold.text-basic.text-body = user_item.user.name
-          span.text-basic.text-muted さんのレビュー
+          span.text-basic.text-muted さん、
+          .folder
+            span.font-weight-bold.text-basic.text-body.brand-name 「#{user_item.comment}
           br
           small.text-basic.text-muted #{user_item.item.brand.name}の#{user_item.item.category.name}
 
