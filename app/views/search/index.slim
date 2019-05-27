@@ -1,6 +1,23 @@
 = render 'shared/search_form'
 .container
   .row
+    .col-12.bg-white.mt-2.py-2.border-bottom
+      span.font-weight-bold 人気急上昇アイテム10選！
+    - UserItem.all.sort_by {|user_item| user_item.created_at }.reverse.first(10).each do |user_item|
+      .col-12.border-bottom.bg-white.py-2
+        small.text-basic.text-muted #{time_ago_in_words(user_item.created_at)}
+        br
+        span.font-weight-bold.text-basic = user_item.item.brand.name
+        .float-right
+          - if user_item.item.amazon_id.present?
+            = user_item.item.amazon_id.slice(/.img................................................................................................................................................................................./).sub(/img/, 'img class = "rounded" height="70" width="70"').html_safe
+          - elsif user_item.image_uid.present?
+            = image_tag user_item.image.thumb('70x70#').url, class:'rounded'
+          - else
+            img.rounded alt="bg-image" width="70" height="70" src=asset_path("bg-image")
+
+.container
+  .row
     .col-12
       h1
         - unless params[:q].nil?
